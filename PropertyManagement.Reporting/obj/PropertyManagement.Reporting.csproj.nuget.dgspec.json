@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ahmed\\OneDrive\\Desktop\\AD.project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj": {}
+    "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ahmed\\OneDrive\\Desktop\\AD.project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj": {
+    "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmed\\OneDrive\\Desktop\\AD.project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
+        "projectUniqueName": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
         "projectName": "PropertyManagement.Reporting",
-        "projectPath": "C:\\Users\\ahmed\\OneDrive\\Desktop\\AD.project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-        "packagesPath": "C:\\Users\\ahmed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmed\\OneDrive\\Desktop\\AD.project\\PropertyManagement\\PropertyManagement.Reporting\\obj\\",
+        "projectPath": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
+        "packagesPath": "C:\\Users\\RANSOR FORCE 7 Elite\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\RANSOR FORCE 7 Elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

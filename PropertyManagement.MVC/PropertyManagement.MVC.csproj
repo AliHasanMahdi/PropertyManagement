@@ -10,8 +10,4 @@
     <ProjectReference Include="..\PropertyManagement.API\PropertyManagement.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.OpenApi" Version="3.1.1" />
-  </ItemGroup>
-
 </Project>
