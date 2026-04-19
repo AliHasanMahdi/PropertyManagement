@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.Lease>
+@{
+    ViewData["Title"] = "Leases";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📄 Leases</h2>
+        <a asp-action="CreateLease" class="btn btn-warning">+ Add Lease</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">❌ @TempData["Error"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tenant</th>
+                        <th>Unit</th>
+                        <th>Building</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Rent</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lease in Model)
+                    {
+                        <tr>
+                            <td>@lease.Id</td>
+                            <td>@lease.Tenant?.FullName</td>
+                            <td>@lease.Unit?.UnitNumber</td>
+                            <td>@lease.Unit?.Building?.Name</td>
+                            <td>@lease.StartDate.ToShortDateString()</td>
+                            <td>@lease.EndDate.ToShortDateString()</td>
+                            <td>BD @lease.MonthlyRent</td>
+                            <td>
+                                <span class="badge
+                                        @(lease.Status == "Active" ? "bg-success" :
+                                                                            lease.Status == "Application" ? "bg-warning" :
+                                                                            lease.Status == "Terminated" ? "bg-danger" : "bg-secondary")">
+                                @lease.Status
+                            </span>
+                        </td>
+                        <td>
+                            <form asp-action="UpdateLeaseStatus" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@lease.Id" />
+                                <select name="status" class="form-select form-select-sm d-inline w-auto">
+                                    <option value="Application">Application</option>
+                                    <option value="Screening">Screening</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Renewal">Renewal</option>
+                                    <option value="Terminated">Terminated</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

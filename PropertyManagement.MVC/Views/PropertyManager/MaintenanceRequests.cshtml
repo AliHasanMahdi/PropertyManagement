@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.MaintenanceRequest>
+@{
+    ViewData["Title"] = "Maintenance Requests";
+    var staffList = ViewBag.Staff as List<PropertyManagement.API.Models.MaintenanceStaff>
+                    ?? new List<PropertyManagement.API.Models.MaintenanceStaff>();
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🔧 Maintenance Requests</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Tenant</th>
+                        <th>Unit</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model)
+                    {
+                        <tr>
+                            <td>@request.TicketNumber</td>
+                            <td>@request.Tenant?.FullName</td>
+                            <td>@request.Unit?.UnitNumber</td>
+                            <td>@request.Category</td>
+                            <td>
+                                <span class="badge
+                                        @(request.Priority == "Urgent" ? "bg-danger" :
+                                                                            request.Priority == "High" ? "bg-warning" :
+                                                                            request.Priority == "Normal" ? "bg-info" : "bg-secondary")">
+                                                                                                                                    @request.Priority
+                                                                                                                                </span>
+                                                                                                                            </td>
+                                                                                                                            <td>
+                                                                                                                                <span class="badge
+                                        @(request.Status == "Submitted" ? "bg-warning" :
+                                                                            request.Status == "Assigned" ? "bg-info" :
+                                                                            request.Status == "InProgress" ? "bg-primary" :
+                                                                            request.Status == "Resolved" ? "bg-success" : "bg-secondary")">
+                                @request.Status
+                            </span>
+                        </td>
+                        <td>@(request.MaintenanceStaff?.FullName ?? "Unassigned")</td>
+                        <td>
+                            <form asp-action="AssignStaff" method="post" class="d-inline">
+                                <input type="hidden" name="requestId" value="@request.Id" />
+                                <select name="staffId" class="form-select form-select-sm d-inline w-auto">
+                                    @foreach (var staff in staffList)
+                                        {
+                                            <option value="@staff.Id">@staff.FullName</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

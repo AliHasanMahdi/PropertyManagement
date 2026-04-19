@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Property Manager Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">🏢 Property Manager Dashboard</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">❌ @TempData["Error"]</div>
+    }
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h6>🏗️ Buildings</h6>
+                    <h2>@ViewBag.TotalBuildings</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h6>🏠 Available Units</h6>
+                    <h2>@ViewBag.AvailableUnits</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white shadow">
+                <div class="card-body">
+                    <h6>🔧 Pending Requests</h6>
+                    <h2>@ViewBag.PendingRequests</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body">
+                    <h6>💰 Overdue Payments</h6>
+                    <h2>@ViewBag.OverduePayments</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>🏗️ Buildings</h5>
+                    <p>Manage all buildings</p>
+                    <a asp-action="Buildings" class="btn btn-primary w-100">View Buildings</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>🏠 Units</h5>
+                    <p>Manage all units</p>
+                    <a asp-action="Units" class="btn btn-success w-100">View Units</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>👥 Tenants</h5>
+                    <p>Manage all tenants</p>
+                    <a asp-action="Tenants" class="btn btn-info w-100">View Tenants</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>📄 Leases</h5>
+                    <p>Manage all leases</p>
+                    <a asp-action="Leases" class="btn btn-warning w-100">View Leases</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>🔧 Maintenance</h5>
+                    <p>Manage maintenance requests</p>
+                    <a asp-action="MaintenanceRequests" class="btn btn-danger w-100">View Requests</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>👷 Staff</h5>
+                    <p>Manage maintenance staff</p>
+                    <a asp-action="Staff" class="btn btn-secondary w-100">View Staff</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

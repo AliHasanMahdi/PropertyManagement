@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.Unit>
+@{
+    ViewData["Title"] = "Units";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🏠 Units</h2>
+        <a asp-action="CreateUnit" class="btn btn-success">+ Add Unit</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Unit #</th>
+                        <th>Building</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Rent</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var unit in Model)
+                    {
+                        <tr>
+                            <td>@unit.UnitNumber</td>
+                            <td>@unit.Building?.Name</td>
+                            <td>@unit.Type</td>
+                            <td>@unit.Size m²</td>
+                            <td>BD @unit.Rent</td>
+                            <td>
+                                <span class="badge @(unit.Status == "Available" ? "bg-success" : "bg-danger")">
+                                    @unit.Status
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="EditUnit" asp-route-id="@unit.Id"
+                                   class="btn btn-sm btn-warning">Edit</a>
+                                <form asp-action="DeleteUnit" method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this unit?')">
+                                    <input type="hidden" name="id" value="@unit.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

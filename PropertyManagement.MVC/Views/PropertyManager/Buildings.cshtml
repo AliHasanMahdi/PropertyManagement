@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.Building>
+@{
+    ViewData["Title"] = "Buildings";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🏗️ Buildings</h2>
+        <a asp-action="CreateBuilding" class="btn btn-primary">+ Add Building</a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Type</th>
+                        <th>Units</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var building in Model)
+                    {
+                        <tr>
+                            <td>@building.Id</td>
+                            <td>@building.Name</td>
+                            <td>@building.Address</td>
+                            <td>@building.City</td>
+                            <td>@building.Type</td>
+                            <td>@building.Units.Count</td>
+                            <td>
+                                <a asp-action="EditBuilding" asp-route-id="@building.Id"
+                                   class="btn btn-sm btn-warning">Edit</a>
+                                <form asp-action="DeleteBuilding" method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this building?')">
+                                    <input type="hidden" name="id" value="@building.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
