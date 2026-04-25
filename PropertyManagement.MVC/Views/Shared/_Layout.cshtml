@@ -31,7 +31,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Tracking/Index">Tracking</a>
                         </li>
+                        @if (User.IsInRole("MaintenanceStaff"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="MaintenanceStaff" asp-action="AssignedRequests">My Requests</a>
+                            </li>
+                        }
                     </ul>
+
+                    <div class="d-flex align-items-center">
+                        @if (!(User.Identity?.IsAuthenticated ?? false))
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-sm btn-primary">Login</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Logout" class="btn btn-sm btn-outline-secondary">Logout</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

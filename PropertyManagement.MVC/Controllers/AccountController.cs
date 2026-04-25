@@ -35,7 +35,7 @@ namespace PropertyManagement.MVC.Controllers
                 if (roles.Contains("PropertyManager"))
                     return RedirectToAction("Dashboard", "PropertyManager");
                 else if (roles.Contains("MaintenanceStaff"))
-                    return RedirectToAction("Dashboard", "MaintenanceStaff");
+                    return RedirectToAction("AssignedRequests", "MaintenanceStaff");
                 else
                     return RedirectToAction("Dashboard", "Tenant");
             }

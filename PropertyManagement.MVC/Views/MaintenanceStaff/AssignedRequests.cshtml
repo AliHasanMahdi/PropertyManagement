@@ -1,0 +1,75 @@
+@model IEnumerable<PropertyManagement.API.Models.MaintenanceRequest>
+@{
+    ViewData["Title"] = "Assigned Requests";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">?? My Assigned Requests</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">? @TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">? @TempData["Error"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Title</th>
+                        <th>Tenant</th>
+                        <th>Unit</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var req in Model)
+                    {
+                        <tr>
+                            <td>@req.TicketNumber</td>
+                            <td>@req.Title</td>
+                            <td>@req.Tenant?.FullName</td>
+                            <td>@req.Unit?.UnitNumber</td>
+                            <td>
+                                <span class="badge @(req.Priority == "Urgent" ? "bg-danger" : req.Priority == "High" ? "bg-warning" : "bg-info")">
+                                    @req.Priority
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge @(req.Status == "Assigned" ? "bg-info" : req.Status == "InProgress" ? "bg-primary" : req.Status == "Resolved" ? "bg-success" : "bg-secondary")">
+                                    @req.Status
+                                </span>
+                            </td>
+                            <td>@req.CreatedAt.ToString("g")</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@req.Id" class="btn btn-sm btn-secondary">Details</a>
+                                @if (req.Status == "Assigned")
+                                {
+                                    <form asp-action="StartWork" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@req.Id" />
+                                        <button type="submit" class="btn btn-sm btn-primary">Start Work</button>
+                                    </form>
+                                }
+                                else if (req.Status == "InProgress")
+                                {
+                                    <form asp-action="Resolve" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="@req.Id" />
+                                        <button type="submit" class="btn btn-sm btn-success">Resolve</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
