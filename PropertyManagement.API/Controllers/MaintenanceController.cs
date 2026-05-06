@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PropertyManagement.API.Data;
-using PropertyManagement.API.Models;
+using PropertyManagement.API.DTOs.Maintenance;
+using PropertyManagement.API.Services.Interfaces;
 
 namespace PropertyManagement.API.Controllers
 {
@@ -11,72 +10,65 @@ namespace PropertyManagement.API.Controllers
     [Authorize]
     public class MaintenanceController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IMaintenanceService _maintenanceService;
 
-        public MaintenanceController(AppDbContext context)
+        public MaintenanceController(IMaintenanceService maintenanceService)
         {
-            _context = context;
+            _maintenanceService = maintenanceService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var requests = await _context.MaintenanceRequests
-                .Include(m => m.Tenant)
-                .Include(m => m.Unit)
-                .Include(m => m.MaintenanceStaff)
-                .ToListAsync();
+            var requests = await _maintenanceService.GetAllAsync();
             return Ok(requests);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var request = await _context.MaintenanceRequests
-                .Include(m => m.Tenant)
-                .Include(m => m.Unit)
-                .Include(m => m.MaintenanceStaff)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (request == null) return NotFound();
+            var request = await _maintenanceService.GetByIdAsync(id);
+            if (request == null)
+                return NotFound(new { message = $"Request with ID {id} not found" });
             return Ok(request);
         }
 
-        // Public lookup - no auth required
         [HttpGet("lookup")]
         [AllowAnonymous]
         public async Task<IActionResult> Lookup([FromQuery] string ticketNumber, [FromQuery] string phone)
         {
-            var request = await _context.MaintenanceRequests
-                .Include(m => m.Tenant)
-                .Include(m => m.Unit)
-                .FirstOrDefaultAsync(m => m.TicketNumber == ticketNumber
-                    && m.Tenant.Phone == phone);
+            if (string.IsNullOrWhiteSpace(ticketNumber) || string.IsNullOrWhiteSpace(phone))
+                return BadRequest(new { message = "Ticket number and phone are required" });
 
-            if (request == null) return NotFound(new { message = "No request found" });
+            var request = await _maintenanceService.LookupAsync(ticketNumber, phone);
+            if (request == null)
+                return NotFound(new { message = "No request found with the provided details" });
+
             return Ok(request);
         }
 
         [HttpPost]
         [Authorize(Roles = "Tenant")]
-        public async Task<IActionResult> Create([FromBody] MaintenanceRequest request)
+        public async Task<IActionResult> Create([FromBody] CreateMaintenanceRequestDto dto)
         {
-            request.TicketNumber = "TKT" + DateTime.Now.Ticks.ToString().Substring(0, 8);
-            request.CreatedAt = DateTime.Now;
-            request.Status = "Submitted";
-            _context.MaintenanceRequests.Add(request);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var request = await _maintenanceService.CreateAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = request.Id }, request);
         }
 
         [HttpPut("{id}/status")]
         [Authorize(Roles = "PropertyManager,MaintenanceStaff")]
-        public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateStatusDto dto)
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateMaintenanceStatusDto dto)
         {
-            var request = await _context.MaintenanceRequests.FindAsync(id);
-            if (request == null) return NotFound();
-            request.Status = dto.Status;
-            if (dto.Status == "Resolved") request.ResolvedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _maintenanceService.UpdateStatusAsync(id, dto.Status);
+            if (!result)
+                return BadRequest(new { message = "Invalid status or request not found" });
+
             return NoContent();
         }
 
@@ -84,22 +76,14 @@ namespace PropertyManagement.API.Controllers
         [Authorize(Roles = "PropertyManager")]
         public async Task<IActionResult> Assign(int id, [FromBody] AssignStaffDto dto)
         {
-            var request = await _context.MaintenanceRequests.FindAsync(id);
-            if (request == null) return NotFound();
-            request.MaintenanceStaffId = dto.StaffId;
-            request.Status = "Assigned";
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _maintenanceService.AssignStaffAsync(id, dto.StaffId);
+            if (!result)
+                return NotFound(new { message = "Request or staff not found" });
+
             return NoContent();
         }
-    }
-
-    public class UpdateStatusDto
-    {
-        public string Status { get; set; } = string.Empty;
-    }
-
-    public class AssignStaffDto
-    {
-        public int StaffId { get; set; }
     }
 }

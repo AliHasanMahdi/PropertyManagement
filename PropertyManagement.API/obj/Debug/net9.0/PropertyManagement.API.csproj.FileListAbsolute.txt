@@ -311,3 +311,6 @@ D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\refint\Pro
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\PropertyManagement.API.pdb
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\PropertyManagement.API.genruntimeconfig.cache
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\ref\PropertyManagement.API.dll
+D:\Project\PropertyManagement\PropertyManagement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Project\PropertyManagement\PropertyManagement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Project\PropertyManagement\PropertyManagement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

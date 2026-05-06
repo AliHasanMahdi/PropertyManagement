@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PropertyManagement.API.Data;
-using PropertyManagement.API.Models;
+using PropertyManagement.API.DTOs.Lease;
+using PropertyManagement.API.Services.Interfaces;
 
 namespace PropertyManagement.API.Controllers
 {
@@ -11,97 +10,70 @@ namespace PropertyManagement.API.Controllers
     [Authorize]
     public class LeasesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ILeaseService _leaseService;
 
-        public LeasesController(AppDbContext context)
+        public LeasesController(ILeaseService leaseService)
         {
-            _context = context;
+            _leaseService = leaseService;
         }
 
         [HttpGet]
         [Authorize(Roles = "PropertyManager")]
         public async Task<IActionResult> GetAll()
         {
-            var leases = await _context.Leases
-                .Include(l => l.Tenant)
-                .Include(l => l.Unit)
-                .ThenInclude(u => u.Building)
-                .Include(l => l.Payments)
-                .ToListAsync();
+            var leases = await _leaseService.GetAllAsync();
             return Ok(leases);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var lease = await _context.Leases
-                .Include(l => l.Tenant)
-                .Include(l => l.Unit)
-                .ThenInclude(u => u.Building)
-                .Include(l => l.Payments)
-                .FirstOrDefaultAsync(l => l.Id == id);
-            if (lease == null) return NotFound();
+            var lease = await _leaseService.GetByIdAsync(id);
+            if (lease == null)
+                return NotFound(new { message = $"Lease with ID {id} not found" });
             return Ok(lease);
         }
 
         [HttpPost]
         [Authorize(Roles = "PropertyManager")]
-        public async Task<IActionResult> Create([FromBody] Lease lease)
+        public async Task<IActionResult> Create([FromBody] CreateLeaseDto dto)
         {
-            // Check if unit is already occupied
-            var activeLeases = await _context.Leases
-                .AnyAsync(l => l.UnitId == lease.UnitId && l.Status == "Active");
-            if (activeLeases)
-                return BadRequest(new { message = "Unit is already occupied!" });
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            lease.Status = "Application";
-            _context.Leases.Add(lease);
+            var (success, message, lease) = await _leaseService.CreateAsync(dto);
+            if (!success)
+                return BadRequest(new { message });
 
-            // Update unit status
-            var unit = await _context.Units.FindAsync(lease.UnitId);
-            if (unit != null) unit.Status = "Occupied";
-
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = lease.Id }, lease);
+            return CreatedAtAction(nameof(GetById), new { id = lease!.Id }, lease);
         }
 
         [HttpPut("{id}/status")]
         [Authorize(Roles = "PropertyManager")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateLeaseStatusDto dto)
         {
-            var lease = await _context.Leases
-                .Include(l => l.Unit)
-                .FirstOrDefaultAsync(l => l.Id == id);
-            if (lease == null) return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            lease.Status = dto.Status;
+            var result = await _leaseService.UpdateStatusAsync(id, dto.Status);
+            if (!result)
+                return BadRequest(new { message = "Invalid status or lease not found" });
 
-            // If terminated, set unit back to available
-            if (dto.Status == "Terminated" && lease.Unit != null)
-                lease.Unit.Status = "Available";
-
-            await _context.SaveChangesAsync();
             return NoContent();
         }
 
         [HttpPost("{id}/payments")]
         [Authorize(Roles = "PropertyManager")]
-        public async Task<IActionResult> AddPayment(int id, [FromBody] Payment payment)
+        public async Task<IActionResult> AddPayment(int id, [FromBody] AddPaymentDto dto)
         {
-            var lease = await _context.Leases.FindAsync(id);
-            if (lease == null) return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            payment.LeaseId = id;
-            payment.PaymentDate = DateTime.Now;
-            payment.Status = "Paid";
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-            return Ok(payment);
+            var result = await _leaseService.AddPaymentAsync(id, dto);
+            if (!result)
+                return NotFound(new { message = $"Lease with ID {id} not found" });
+
+            return Ok(new { message = "Payment recorded successfully" });
         }
-    }
-
-    public class UpdateLeaseStatusDto
-    {
-        public string Status { get; set; } = string.Empty;
     }
 }

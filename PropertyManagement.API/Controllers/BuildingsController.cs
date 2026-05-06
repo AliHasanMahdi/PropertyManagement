@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PropertyManagement.API.Data;
-using PropertyManagement.API.Models;
+using PropertyManagement.API.DTOs.Building;
+using PropertyManagement.API.Services.Interfaces;
 
 namespace PropertyManagement.API.Controllers
 {
@@ -11,45 +10,51 @@ namespace PropertyManagement.API.Controllers
     [Authorize]
     public class BuildingsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IBuildingService _buildingService;
 
-        public BuildingsController(AppDbContext context)
+        public BuildingsController(IBuildingService buildingService)
         {
-            _context = context;
+            _buildingService = buildingService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var buildings = await _context.Buildings.Include(b => b.Units).ToListAsync();
+            var buildings = await _buildingService.GetAllAsync();
             return Ok(buildings);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var building = await _context.Buildings.Include(b => b.Units)
-                .FirstOrDefaultAsync(b => b.Id == id);
-            if (building == null) return NotFound();
+            var building = await _buildingService.GetByIdAsync(id);
+            if (building == null)
+                return NotFound(new { message = $"Building with ID {id} not found" });
             return Ok(building);
         }
 
         [HttpPost]
         [Authorize(Roles = "PropertyManager")]
-        public async Task<IActionResult> Create([FromBody] Building building)
+        public async Task<IActionResult> Create([FromBody] CreateBuildingDto dto)
         {
-            _context.Buildings.Add(building);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var building = await _buildingService.CreateAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = building.Id }, building);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "PropertyManager")]
-        public async Task<IActionResult> Update(int id, [FromBody] Building building)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateBuildingDto dto)
         {
-            if (id != building.Id) return BadRequest();
-            _context.Entry(building).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _buildingService.UpdateAsync(id, dto);
+            if (!result)
+                return NotFound(new { message = $"Building with ID {id} not found" });
+
             return NoContent();
         }
 
@@ -57,10 +62,10 @@ namespace PropertyManagement.API.Controllers
         [Authorize(Roles = "PropertyManager")]
         public async Task<IActionResult> Delete(int id)
         {
-            var building = await _context.Buildings.FindAsync(id);
-            if (building == null) return NotFound();
-            _context.Buildings.Remove(building);
-            await _context.SaveChangesAsync();
+            var result = await _buildingService.DeleteAsync(id);
+            if (!result)
+                return NotFound(new { message = $"Building with ID {id} not found" });
+
             return NoContent();
         }
     }

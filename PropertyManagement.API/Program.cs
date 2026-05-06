@@ -6,6 +6,8 @@ using PropertyManagement.API.Data;
 using System.Text;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using PropertyManagement.API.Services;
+using PropertyManagement.API.Services.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,10 +42,21 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Register Services
+builder.Services.AddScoped<IBuildingService, BuildingService>();
+builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
+builder.Services.AddScoped<ILeaseService, LeaseService>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
+
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
@@ -89,11 +102,10 @@ catch (ReflectionTypeLoadException ex)
     throw;
 }
 
-// builder.Services.AddSwaggerGen();
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
+if (app.Environment.IsDevelopment())
+ {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();
