@@ -1,0 +1,39 @@
+﻿@model PropertyManagement.API.Models.Tenant
+@{
+    ViewData["Title"] = "Create Tenant";
+}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4>👥 Add New Tenant</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateTenant" method="post">
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label"></label>
+                            <input asp-for="FullName" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" type="email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CPR" class="form-label"></label>
+                            <input asp-for="CPR" class="form-control" required />
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-info w-100">Save</button>
+                            <a asp-action="Tenants" class="btn btn-secondary w-100">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

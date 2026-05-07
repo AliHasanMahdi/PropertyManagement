@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PropertyManagement.API.Data;
+using PropertyManagement.MVC.ViewModels.Account;
+
 
 namespace PropertyManagement.MVC.Controllers
 {
@@ -44,33 +45,33 @@ namespace PropertyManagement.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register() => View();
+        public IActionResult Register() => View(new RegisterViewModel());
 
         [HttpPost]
-        public async Task<IActionResult> Register(string email, string password, string role)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if (!ModelState.IsValid) return View(model);
+
             // Create roles if they don't exist
             string[] roles = { "PropertyManager", "MaintenanceStaff", "Tenant" };
             foreach (var r in roles)
-            {
                 if (!await _roleManager.RoleExistsAsync(r))
                     await _roleManager.CreateAsync(new IdentityRole(r));
-            }
 
-            var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
+            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, role);
-                await _signInManager.SignInAsync(user, false);
-                return RedirectToAction("Login", "Account");
+                await _userManager.AddToRoleAsync(user, model.Role);
+                TempData["Success"] = "Account created successfully! Please login.";
+                return RedirectToAction("Login");
             }
 
             foreach (var error in result.Errors)
                 ModelState.AddModelError("", error.Description);
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()

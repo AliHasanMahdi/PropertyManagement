@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.API.Data;
 using PropertyManagement.API.Models;
+using PropertyManagement.MVC.ViewModels.PropertyManager;
 
 namespace PropertyManagement.MVC.Controllers
 {
@@ -39,19 +40,25 @@ namespace PropertyManagement.MVC.Controllers
             return View(buildings);
         }
 
-        public IActionResult CreateBuilding() => View();
+        public IActionResult CreateBuilding() => View(new CreateBuildingViewModel());
 
+     
         [HttpPost]
-        public async Task<IActionResult> CreateBuilding(Building building)
+        public async Task<IActionResult> CreateBuilding(CreateBuildingViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var building = new Building
             {
-                _context.Buildings.Add(building);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Building created successfully!";
-                return RedirectToAction("Buildings");
-            }
-            return View(building);
+                Name = model.Name,
+                Address = model.Address,
+                City = model.City,
+                Type = model.Type
+            };
+            _context.Buildings.Add(building);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Building created successfully!";
+            return RedirectToAction("Buildings");
         }
 
         public async Task<IActionResult> EditBuilding(int id)
@@ -99,21 +106,31 @@ namespace PropertyManagement.MVC.Controllers
         public async Task<IActionResult> CreateUnit()
         {
             ViewBag.Buildings = await _context.Buildings.ToListAsync();
-            return View();
+            return View(new CreateUnitViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUnit(Unit unit)
+        public async Task<IActionResult> CreateUnit(CreateUnitViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Units.Add(unit);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Unit created successfully!";
-                return RedirectToAction("Units");
+                ViewBag.Buildings = await _context.Buildings.ToListAsync();
+                return View(model);
             }
-            ViewBag.Buildings = await _context.Buildings.ToListAsync();
-            return View(unit);
+            var unit = new Unit
+            {
+                UnitNumber = model.UnitNumber,
+                Type = model.Type,
+                Size = model.Size,
+                Rent = model.Rent,
+                Amenities = model.Amenities,
+                BuildingId = model.BuildingId,
+                Status = "Available"
+            };
+            _context.Units.Add(unit);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Unit created successfully!";
+            return RedirectToAction("Units");
         }
 
         public async Task<IActionResult> EditUnit(int id)
@@ -160,20 +177,25 @@ namespace PropertyManagement.MVC.Controllers
             return View(tenants);
         }
 
-        public IActionResult CreateTenant() => View();
+        public IActionResult CreateTenant() => View(new CreateTenantViewModel());
 
         [HttpPost]
-        public async Task<IActionResult> CreateTenant(Tenant tenant)
+        public async Task<IActionResult> CreateTenant(CreateTenantViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var tenant = new Tenant
             {
-                tenant.DateRegistered = DateTime.Now;
-                _context.Tenants.Add(tenant);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Tenant created successfully!";
-                return RedirectToAction("Tenants");
-            }
-            return View(tenant);
+                FullName = model.FullName,
+                Email = model.Email,
+                Phone = model.Phone,
+                CPR = model.CPR,
+                DateRegistered = DateTime.Now
+            };
+            _context.Tenants.Add(tenant);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Tenant created successfully!";
+            return RedirectToAction("Tenants");
         }
 
         // ==================== LEASES ====================
@@ -195,15 +217,27 @@ namespace PropertyManagement.MVC.Controllers
                 .Where(u => u.Status == "Available")
                 .Include(u => u.Building)
                 .ToListAsync();
-            return View();
+            return View(new CreateLeaseViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateLease(Lease lease)
+        public async Task<IActionResult> CreateLease(CreateLeaseViewModel model)
         {
-            // Check if unit is already occupied
+            if (model.EndDate <= model.StartDate)
+                ModelState.AddModelError("EndDate", "End date must be after start date");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Tenants = await _context.Tenants.ToListAsync();
+                ViewBag.Units = await _context.Units
+                    .Where(u => u.Status == "Available")
+                    .Include(u => u.Building)
+                    .ToListAsync();
+                return View(model);
+            }
+
             var activeLeases = await _context.Leases
-                .AnyAsync(l => l.UnitId == lease.UnitId && l.Status == "Active");
+                .AnyAsync(l => l.UnitId == model.UnitId && l.Status == "Active");
 
             if (activeLeases)
             {
@@ -213,28 +247,26 @@ namespace PropertyManagement.MVC.Controllers
                     .Where(u => u.Status == "Available")
                     .Include(u => u.Building)
                     .ToListAsync();
-                return View(lease);
+                return View(model);
             }
 
-            if (ModelState.IsValid)
+            var lease = new Lease
             {
-                lease.Status = "Application";
-                _context.Leases.Add(lease);
+                TenantId = model.TenantId,
+                UnitId = model.UnitId,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                MonthlyRent = model.MonthlyRent,
+                Status = "Application"
+            };
+            _context.Leases.Add(lease);
 
-                var unit = await _context.Units.FindAsync(lease.UnitId);
-                if (unit != null) unit.Status = "Occupied";
+            var unit = await _context.Units.FindAsync(model.UnitId);
+            if (unit != null) unit.Status = "Occupied";
 
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Lease created successfully!";
-                return RedirectToAction("Leases");
-            }
-
-            ViewBag.Tenants = await _context.Tenants.ToListAsync();
-            ViewBag.Units = await _context.Units
-                .Where(u => u.Status == "Available")
-                .Include(u => u.Building)
-                .ToListAsync();
-            return View(lease);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Lease created successfully!";
+            return RedirectToAction("Leases");
         }
 
         [HttpPost]
@@ -340,19 +372,25 @@ namespace PropertyManagement.MVC.Controllers
             return View(staff);
         }
 
-        public IActionResult CreateStaff() => View();
+        public IActionResult CreateStaff() => View(new CreateStaffViewModel());
 
         [HttpPost]
-        public async Task<IActionResult> CreateStaff(MaintenanceStaff staff)
+        public async Task<IActionResult> CreateStaff(CreateStaffViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+
+            var staff = new MaintenanceStaff
             {
-                _context.MaintenanceStaffs.Add(staff);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Staff member created successfully!";
-                return RedirectToAction("Staff");
-            }
-            return View(staff);
+                FullName = model.FullName,
+                Email = model.Email,
+                Phone = model.Phone,
+                SkillType = model.SkillType,
+                AvailabilityStatus = "Available"
+            };
+            _context.MaintenanceStaffs.Add(staff);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Staff member added successfully!";
+            return RedirectToAction("Staff");
         }
     }
 }

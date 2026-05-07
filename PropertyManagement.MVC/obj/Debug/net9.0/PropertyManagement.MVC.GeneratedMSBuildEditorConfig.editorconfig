@@ -68,6 +68,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXENyZWF0ZUJ1aWxkaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/CreateLease.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXENyZWF0ZUxlYXNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/CreateStaff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXENyZWF0ZVN0YWZmLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/CreateTenant.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXENyZWF0ZVRlbmFudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/CreateUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXENyZWF0ZVVuaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -80,6 +96,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXE1haW50ZW5hbmNlUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/Payments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXFBheW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/Staff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXFN0YWZmLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/Tenants.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXFRlbmFudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/Units.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXFVuaXRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -90,6 +118,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Project/PropertyManagement/PropertyManagement.MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/Tenant/CreateMaintenanceRequest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVuYW50XENyZWF0ZU1haW50ZW5hbmNlUmVxdWVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/Tenant/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVuYW50XERhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/Tenant/MaintenanceRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVuYW50XE1haW50ZW5hbmNlUmVxdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/Tenant/MyLease.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVuYW50XE15TGVhc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Project/PropertyManagement/PropertyManagement.MVC/Views/_ViewImports.cshtml]

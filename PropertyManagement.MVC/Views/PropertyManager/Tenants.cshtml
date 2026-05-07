@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.Tenant>
+@{
+    ViewData["Title"] = "Tenants";
+}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>👥 Tenants</h2>
+        <a asp-action="CreateTenant" class="btn btn-info">+ Add Tenant</a>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
+    }
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>CPR</th>
+                        <th>Leases</th>
+                        <th>Registered</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tenant in Model)
+                    {
+                        <tr>
+                            <td>@tenant.FullName</td>
+                            <td>@tenant.Email</td>
+                            <td>@tenant.Phone</td>
+                            <td>@tenant.CPR</td>
+                            <td>@tenant.Leases.Count</td>
+                            <td>@tenant.DateRegistered.ToShortDateString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

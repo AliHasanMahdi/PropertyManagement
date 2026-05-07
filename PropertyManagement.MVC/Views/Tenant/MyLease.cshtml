@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.Lease>
+@{
+    ViewData["Title"] = "My Lease";
+}
+<div class="container mt-4">
+    <h2>📄 My Lease</h2>
+    @foreach (var lease in Model)
+    {
+        <div class="card shadow mb-3">
+            <div class="card-header d-flex justify-content-between">
+                <span>Lease #@lease.Id</span>
+                <span class="badge @(lease.Status == "Active" ? "bg-success" : "bg-secondary")">@lease.Status</span>
+            </div>
+            <div class="card-body">
+                <p><strong>Unit:</strong> @lease.Unit?.UnitNumber - @lease.Unit?.Building?.Name</p>
+                <p><strong>Start:</strong> @lease.StartDate.ToShortDateString()</p>
+                <p><strong>End:</strong> @lease.EndDate.ToShortDateString()</p>
+                <p><strong>Monthly Rent:</strong> BD @lease.MonthlyRent</p>
+                <h6>💰 Payments</h6>
+                <table class="table table-sm">
+                    <thead><tr><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+                    <tbody>
+                        @foreach (var p in lease.Payments)
+                        {
+                            <tr>
+                                <td>BD @p.Amount</td>
+                                <td>@p.PaymentDate.ToShortDateString()</td>
+                                <td><span class="badge @(p.Status == "Paid" ? "bg-success" : "bg-danger")">@p.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
