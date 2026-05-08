@@ -3,48 +3,52 @@
   "WorkspaceRootPath": "D:\\Project\\PropertyManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\services\\apiclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\services\\apiclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\propertymanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\propertymanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\controllers\\propertymanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\controllers\\propertymanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\maintenanceboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\maintenanceboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\services\\maintenanceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\hubs\\maintenancehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\hubs\\maintenancehub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,58 +63,84 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MaintenanceService.cs",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Services\\MaintenanceService.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\Services\\MaintenanceService.cs",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Services\\MaintenanceService.cs",
-              "RelativeToolTip": "PropertyManagement.API\\Services\\MaintenanceService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHoAAAAkAAAAAAAAAA==",
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwHUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T15:16:51.135Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Program.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Program.cs",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Program.cs",
-              "RelativeToolTip": "PropertyManagement.MVC\\Program.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T15:15:12.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PropertyManagement.MVC",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "RelativeToolTip": "PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-06T15:08:18.869Z",
+              "WhenOpened": "2026-05-08T21:40:43.882Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\Program.cs",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
-              "RelativeToolTip": "PropertyManagement.API\\Program.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAmwEoAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Program.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Program.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Program.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Program.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T15:05:05.411Z",
+              "WhenOpened": "2026-05-08T21:39:01.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApiClientService.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Services\\ApiClientService.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Services\\ApiClientService.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Services\\ApiClientService.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Services\\ApiClientService.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAuwJcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:38:43.644Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Services\\TokenService.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Services\\TokenService.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Services\\TokenService.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAA3wEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:34:51.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "PropertyManagement.API\\Controllers\\AuthController.cs*",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwHYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:33:12.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\Dashboard.cshtml",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Dashboard.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\Dashboard.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAswDwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-08T21:29:31.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\appsettings.json",
               "RelativeDocumentMoniker": "PropertyManagement.MVC\\appsettings.json",
@@ -118,85 +148,72 @@
               "RelativeToolTip": "PropertyManagement.MVC\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-06T15:04:20.15Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PropertyManagement.API",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\PropertyManagement.API.csproj",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
-              "RelativeToolTip": "PropertyManagement.API\\PropertyManagement.API.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-06T15:05:30.215Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "PropertyManagement.API\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-06T15:05:12.983Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\appsettings.json",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\appsettings.json",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\appsettings.json",
-              "RelativeToolTip": "PropertyManagement.API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-06T15:05:11.097Z",
+              "WhenOpened": "2026-05-08T21:26:27.835Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\appsettings.Development.json",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\appsettings.Development.json",
-              "RelativeToolTip": "PropertyManagement.MVC\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-06T15:04:54.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Properties\\launchSettings.json",
-              "RelativeToolTip": "PropertyManagement.MVC\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-06T15:04:28.407Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
               "Title": "PropertyManagerController.cs",
               "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
               "RelativeDocumentMoniker": "PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
               "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
               "RelativeToolTip": "PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAYwE0AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-19T01:39:34.673Z",
+              "WhenOpened": "2026-05-08T21:23:31.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MaintenanceBoard.cshtml",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAswP8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-08T21:23:02.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MaintenanceService.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Services\\MaintenanceService.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Services\\MaintenanceService.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Services\\MaintenanceService.cs",
+              "RelativeToolTip": "PropertyManagement.API\\Services\\MaintenanceService.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAwwKEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:21:20.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Program.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
+              "RelativeToolTip": "PropertyManagement.API\\Program.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAwwFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:20:27.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MaintenanceHub.cs",
+              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Hubs\\MaintenanceHub.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Hubs\\MaintenanceHub.cs",
+              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Hubs\\MaintenanceHub.cs",
+              "RelativeToolTip": "PropertyManagement.API\\Hubs\\MaintenanceHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-08T21:19:59.018Z",
               "EditorCaption": ""
             }
           ]

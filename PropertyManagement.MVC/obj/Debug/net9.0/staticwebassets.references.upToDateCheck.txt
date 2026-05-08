@@ -7,3 +7,4 @@ C:\Users\RANSOR FORCE 7 Elite\source\repos\PropertyManagement\PropertyManagement
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json

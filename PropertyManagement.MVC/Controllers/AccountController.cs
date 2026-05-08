@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PropertyManagement.MVC.Services;
 using PropertyManagement.MVC.ViewModels.Account;
-
 
 namespace PropertyManagement.MVC.Controllers
 {
@@ -10,38 +10,61 @@ namespace PropertyManagement.MVC.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApiClientService _apiClient;
+        private readonly TokenService _tokenService;
 
         public AccountController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApiClientService apiClient,
+            TokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _apiClient = apiClient;
+            _tokenService = tokenService;
         }
 
         [HttpGet]
-        public IActionResult Login() => View();
+        public IActionResult Login() => View(new LoginViewModel());
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, false, false);
-            if (result.Succeeded)
-            {
-                var user = await _userManager.FindByEmailAsync(email);
-                var roles = await _userManager.GetRolesAsync(user!);
+            if (!ModelState.IsValid) return View(model);
 
-                if (roles.Contains("PropertyManager"))
-                    return RedirectToAction("Dashboard", "PropertyManager");
-                else if (roles.Contains("MaintenanceStaff"))
-                    return RedirectToAction("AssignedRequests", "MaintenanceStaff");
-                else
-                    return RedirectToAction("Dashboard", "Tenant");
+            // Step 1: Sign in with Identity (for MVC cookie auth)
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Email, model.Password, model.RememberMe, false);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Invalid email or password");
+                return View(model);
             }
-            ModelState.AddModelError("", "Invalid login attempt");
-            return View();
+
+            // Step 2: Get JWT token from API (for API calls)
+            var (success, token, roles, error) =
+                await _apiClient.LoginAsync(model.Email, model.Password);
+
+            if (success && token != null && roles != null)
+            {
+                // Save JWT token in cookie for API calls
+                _tokenService.SaveToken(token, model.Email, roles);
+            }
+
+            // Step 3: Redirect based on role
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            var userRoles = await _userManager.GetRolesAsync(user!);
+
+            if (userRoles.Contains("PropertyManager"))
+                return RedirectToAction("Dashboard", "PropertyManager");
+            else if (userRoles.Contains("MaintenanceStaff"))
+                return RedirectToAction("Dashboard", "MaintenanceStaff");
+            else
+                return RedirectToAction("Dashboard", "Tenant");
         }
 
         [HttpGet]
@@ -58,13 +81,18 @@ namespace PropertyManagement.MVC.Controllers
                 if (!await _roleManager.RoleExistsAsync(r))
                     await _roleManager.CreateAsync(new IdentityRole(r));
 
-            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var user = new IdentityUser
+            {
+                UserName = model.Email,
+                Email = model.Email
+            };
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, model.Role);
-                TempData["Success"] = "Account created successfully! Please login.";
+                TempData["Success"] = "Account created! Please login.";
                 return RedirectToAction("Login");
             }
 
@@ -76,7 +104,12 @@ namespace PropertyManagement.MVC.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            // Clear JWT cookie
+            _tokenService.ClearToken();
+
+            // Clear Identity cookie
             await _signInManager.SignOutAsync();
+
             return RedirectToAction("Login");
         }
 

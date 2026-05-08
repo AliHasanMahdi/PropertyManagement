@@ -92,6 +92,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXExlYXNlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/MaintenanceBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXE1haW50ZW5hbmNlQm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/PropertyManagement/PropertyManagement.MVC/Views/PropertyManager/MaintenanceRequests.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydHlNYW5hZ2VyXE1haW50ZW5hbmNlUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using PropertyManagement.API.Data;
 using PropertyManagement.API.DTOs.Maintenance;
+using PropertyManagement.API.Hubs;
 using PropertyManagement.API.Models;
 using PropertyManagement.API.Services.Interfaces;
 
@@ -9,10 +11,12 @@ namespace PropertyManagement.API.Services
     public class MaintenanceService : IMaintenanceService
     {
         private readonly AppDbContext _context;
+        private readonly IHubContext<MaintenanceHub> _hubContext;
 
-        public MaintenanceService(AppDbContext context)
+        public MaintenanceService(AppDbContext context, IHubContext<MaintenanceHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         public async Task<IEnumerable<MaintenanceResponseDto>> GetAllAsync()
@@ -70,27 +74,50 @@ namespace PropertyManagement.API.Services
             await _context.Entry(request).Reference(r => r.Tenant).LoadAsync();
             await _context.Entry(request).Reference(r => r.Unit).LoadAsync();
 
-            return MapToDto(request);
+            var dto2 = MapToDto(request);
+
+            // Broadcast new request to all connected clients
+            await _hubContext.Clients.Group("MaintenanceBoard")
+                .SendAsync("NewRequest", dto2);
+
+            return dto2;
         }
 
         public async Task<bool> UpdateStatusAsync(int id, string status)
         {
-            var validStatuses = new[] { "Submitted", "Assigned", "InProgress", "Resolved", "Closed" };
+            var validStatuses = new[]
+            { "Submitted", "Assigned", "InProgress", "Resolved", "Closed" };
+
             if (!validStatuses.Contains(status)) return false;
 
-            var request = await _context.MaintenanceRequests.FindAsync(id);
+            var request = await _context.MaintenanceRequests
+                .Include(m => m.Tenant)
+                .Include(m => m.Unit)
+                .Include(m => m.MaintenanceStaff)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (request == null) return false;
 
             request.Status = status;
             if (status == "Resolved") request.ResolvedAt = DateTime.Now;
 
             await _context.SaveChangesAsync();
+
+            // Broadcast status update to all connected clients
+            await _hubContext.Clients.Group("MaintenanceBoard")
+                .SendAsync("StatusUpdated", MapToDto(request));
+
             return true;
         }
 
         public async Task<bool> AssignStaffAsync(int id, int staffId)
         {
-            var request = await _context.MaintenanceRequests.FindAsync(id);
+            var request = await _context.MaintenanceRequests
+                .Include(m => m.Tenant)
+                .Include(m => m.Unit)
+                .Include(m => m.MaintenanceStaff)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             var staff = await _context.MaintenanceStaffs.FindAsync(staffId);
 
             if (request == null || staff == null) return false;
@@ -108,6 +135,11 @@ namespace PropertyManagement.API.Services
             _context.Notifications.Add(notification);
 
             await _context.SaveChangesAsync();
+
+            // Broadcast assignment to all connected clients
+            await _hubContext.Clients.Group("MaintenanceBoard")
+                .SendAsync("StaffAssigned", MapToDto(request));
+
             return true;
         }
 

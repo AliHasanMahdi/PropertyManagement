@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PropertyManagement.API.Data;
 using PropertyManagement.API.Models;
 using PropertyManagement.MVC.ViewModels.PropertyManager;
@@ -11,10 +12,12 @@ namespace PropertyManagement.MVC.Controllers
     public class PropertyManagerController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public PropertyManagerController(AppDbContext context)
+        public PropertyManagerController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // ==================== DASHBOARD ====================
@@ -391,6 +394,12 @@ namespace PropertyManagement.MVC.Controllers
             await _context.SaveChangesAsync();
             TempData["Success"] = "Staff member added successfully!";
             return RedirectToAction("Staff");
+        }
+
+        public IActionResult MaintenanceBoard()
+        {
+            ViewBag.ApiBaseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7001";
+            return View();
         }
     }
 }

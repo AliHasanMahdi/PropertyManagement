@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PropertyManagement.API.Data;
+using PropertyManagement.MVC.Services;
+using System;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,11 @@ builder.Services.AddHttpClient("API", client =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// Token and API services
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<ApiClientService>();
 
 var app = builder.Build();
 

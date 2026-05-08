@@ -8,6 +8,8 @@ using System.Reflection;
 using Microsoft.Extensions.Logging;
 using PropertyManagement.API.Services;
 using PropertyManagement.API.Services.Interfaces;
+using PropertyManagement.API.Hubs;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMVC", policy =>
+    {
+        policy.WithOrigins(
+            "https://localhost:7002",
+            "http://localhost:5002")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
 // JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -48,6 +64,8 @@ builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
 builder.Services.AddScoped<ILeaseService, LeaseService>();
 
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -61,6 +79,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("AllowMVC");
 
 // Diagnostic wrapper: catch ReflectionTypeLoadException and log LoaderExceptions + assemblies that fail GetTypes()
 try

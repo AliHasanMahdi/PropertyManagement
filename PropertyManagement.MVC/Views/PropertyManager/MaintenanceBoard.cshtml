@@ -1,0 +1,256 @@
+﻿@{
+    ViewData["Title"] = "Live Maintenance Board";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📋 Live Maintenance Board</h2>
+        <span id="connectionStatus" class="badge bg-warning">Connecting...</span>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <h6>📥 Submitted</h6>
+                    <h3 id="count-Submitted">0</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h6>👷 Assigned</h6>
+                    <h3 id="count-Assigned">0</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h6>🔧 In Progress</h6>
+                    <h3 id="count-InProgress">0</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h6>✅ Resolved</h6>
+                    <h3 id="count-Resolved">0</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white d-flex justify-content-between">
+            <span>🔴 Live Requests</span>
+            <span class="small">Updates in real-time</span>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0" id="requestsTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Title</th>
+                        <th>Tenant</th>
+                        <th>Unit</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="requestsBody">
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            Loading requests...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        const apiBaseUrl = "@(ViewBag.ApiBaseUrl ?? "https://localhost:7001")";
+        let requests = [];
+
+        // Connect to SignalR Hub
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl(`${apiBaseUrl}/hubs/maintenance`)
+            .withAutomaticReconnect()
+            .build();
+
+        // Handle new request
+        connection.on("NewRequest", function (request) {
+            requests.unshift(request);
+            renderTable();
+            updateCounts();
+            showToast(`New request: ${request.ticketNumber}`, "warning");
+        });
+
+        // Handle status update
+        connection.on("StatusUpdated", function (request) {
+            const index = requests.findIndex(r => r.id === request.id);
+            if (index !== -1) requests[index] = request;
+            renderTable();
+            updateCounts();
+            showToast(`Status updated: ${request.ticketNumber} → ${request.status}`, "info");
+        });
+
+        // Handle staff assigned
+        connection.on("StaffAssigned", function (request) {
+            const index = requests.findIndex(r => r.id === request.id);
+            if (index !== -1) requests[index] = request;
+            renderTable();
+            updateCounts();
+            showToast(`Staff assigned to: ${request.ticketNumber}`, "success");
+        });
+
+        // Connection status
+        connection.onreconnecting(() => {
+            document.getElementById("connectionStatus").className = "badge bg-warning";
+            document.getElementById("connectionStatus").textContent = "Reconnecting...";
+        });
+
+        connection.onreconnected(() => {
+            document.getElementById("connectionStatus").className = "badge bg-success";
+            document.getElementById("connectionStatus").textContent = "🟢 Live";
+        });
+
+        connection.onclose(() => {
+            document.getElementById("connectionStatus").className = "badge bg-danger";
+            document.getElementById("connectionStatus").textContent = "🔴 Disconnected";
+        });
+
+        // Start connection
+        async function startConnection() {
+            try {
+                await connection.start();
+                document.getElementById("connectionStatus").className = "badge bg-success";
+                document.getElementById("connectionStatus").textContent = "🟢 Live";
+                await loadRequests();
+            } catch (err) {
+                document.getElementById("connectionStatus").className = "badge bg-danger";
+                document.getElementById("connectionStatus").textContent = "🔴 Error";
+                setTimeout(startConnection, 5000);
+            }
+        }
+
+        // Load initial requests
+        async function loadRequests() {
+            try {
+                const response = await fetch(`${apiBaseUrl}/api/maintenance`, {
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    }
+                });
+                if (response.ok) {
+                    requests = await response.json();
+                    renderTable();
+                    updateCounts();
+                }
+            } catch (err) {
+                console.error("Error loading requests:", err);
+            }
+        }
+
+        // Get token from cookie or session
+        function getToken() {
+            return document.cookie.split(';')
+                .find(c => c.trim().startsWith('jwtToken='))
+                ?.split('=')[1] ?? '';
+        }
+
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById("requestsBody");
+            if (requests.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-4">No requests found</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = requests.map(r => `
+                <tr class="${getRowClass(r.status)} fade-in">
+                    <td><strong>${r.ticketNumber}</strong></td>
+                    <td>${r.title}</td>
+                    <td>${r.tenantName}</td>
+                    <td>${r.unitNumber}</td>
+                    <td>${getPriorityBadge(r.priority)}</td>
+                    <td>${getStatusBadge(r.status)}</td>
+                    <td>${r.assignedStaffName ?? '<span class="text-muted">Unassigned</span>'}</td>
+                    <td><small>${new Date(r.createdAt).toLocaleString()}</small></td>
+                </tr>
+            `).join('');
+        }
+
+        // Update counts
+        function updateCounts() {
+            ["Submitted", "Assigned", "InProgress", "Resolved"].forEach(status => {
+                const count = requests.filter(r => r.status === status).length;
+                const el = document.getElementById(`count-${status}`);
+                if (el) el.textContent = count;
+            });
+        }
+
+        // Helper functions
+        function getRowClass(status) {
+            const map = {
+                "Submitted": "table-warning",
+                "Assigned": "table-info",
+                "InProgress": "table-primary",
+                "Resolved": "table-success",
+                "Closed": "table-secondary"
+            };
+            return map[status] ?? "";
+        }
+
+        function getPriorityBadge(priority) {
+            const map = {
+                "Urgent": "bg-danger",
+                "High": "bg-warning",
+                "Normal": "bg-info",
+                "Low": "bg-secondary"
+            };
+            return `<span class="badge ${map[priority] ?? 'bg-secondary'}">${priority}</span>`;
+        }
+
+        function getStatusBadge(status) {
+            const map = {
+                "Submitted": "bg-warning",
+                "Assigned": "bg-info",
+                "InProgress": "bg-primary",
+                "Resolved": "bg-success",
+                "Closed": "bg-secondary"
+            };
+            return `<span class="badge ${map[status] ?? 'bg-secondary'}">${status}</span>`;
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type} position-fixed bottom-0 end-0 m-3`;
+            toast.style.zIndex = "9999";
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Start everything
+        startConnection();
+    </script>
+
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @@keyframes fadeIn {
+            from { opacity: 0; background-color: #fff3cd; }
+            to { opacity: 1; }
+        }
+    </style>
+}
