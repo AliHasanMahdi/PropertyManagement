@@ -1,0 +1,141 @@
+﻿@model PropertyManagement.Reporting.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Reports Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📊 Property Manager Reports</h2>
+
+    <!-- Occupancy Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body text-center">
+                    <h6>🏠 Total Units</h6>
+                    <h2>@(Model.Occupancy?.TotalUnits ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body text-center">
+                    <h6>✅ Occupied</h6>
+                    <h2>@(Model.Occupancy?.OccupiedUnits ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white shadow">
+                <div class="card-body text-center">
+                    <h6>🔓 Available</h6>
+                    <h2>@(Model.Occupancy?.AvailableUnits ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white shadow">
+                <div class="card-body text-center">
+                    <h6>📈 Occupancy Rate</h6>
+                    <h2>@(Model.Occupancy?.OccupancyRate.ToString("F1") ?? "0")%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card bg-danger text-white shadow">
+                <div class="card-body text-center">
+                    <h6>🔧 Total Requests</h6>
+                    <h2>@(Model.MaintenanceStats?.TotalRequests ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-secondary text-white shadow">
+                <div class="card-body text-center">
+                    <h6>⏳ Pending</h6>
+                    <h2>@(Model.MaintenanceStats?.PendingRequests ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body text-center">
+                    <h6>✅ Resolved</h6>
+                    <h2>@(Model.MaintenanceStats?.ResolvedRequests ?? 0)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <!-- Quick Links -->
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>🏗️ Occupancy Report</h5>
+                    <p>View occupancy rates by building</p>
+                    <a asp-action="OccupancyReport"
+                       class="btn btn-primary w-100">View Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>🔧 Maintenance Report</h5>
+                    <p>View maintenance request stats</p>
+                    <a asp-action="MaintenanceReport"
+                       class="btn btn-danger w-100">View Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <h5>📄 Lease Report</h5>
+                    <p>View lease and payment stats</p>
+                    <a asp-action="LeaseReport"
+                       class="btn btn-warning w-100">View Report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overdue Payments -->
+    @if (Model.OverdueLeases.Any())
+    {
+        <div class="mt-4">
+            <h5 class="text-danger">⚠️ Overdue Payments</h5>
+            <div class="card shadow">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-danger">
+                            <tr>
+                                <th>Tenant</th>
+                                <th>Unit</th>
+                                <th>Building</th>
+                                <th>Monthly Rent</th>
+                                <th>Total Paid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var lease in Model.OverdueLeases)
+                            {
+                                <tr>
+                                    <td>@lease.TenantName</td>
+                                    <td>@lease.UnitNumber</td>
+                                    <td>@lease.BuildingName</td>
+                                    <td>BD @lease.MonthlyRent</td>
+                                    <td>BD @lease.TotalPaid</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>

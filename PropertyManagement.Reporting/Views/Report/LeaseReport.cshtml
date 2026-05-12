@@ -1,0 +1,93 @@
+﻿@model List<PropertyManagement.Reporting.Models.LeaseModel>
+@{
+    ViewData["Title"] = "Lease Report";
+    var active = Model.Count(l => l.Status == "Active");
+    var totalRevenue = Model.Sum(l => l.TotalPaid);
+    var overdue = Model.Count(l => l.HasOverduePayments);
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📄 Lease Report</h2>
+        <a asp-action="Dashboard" class="btn btn-secondary">← Back</a>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card bg-success text-white text-center">
+                <div class="card-body">
+                    <h6>Active Leases</h6>
+                    <h2>@active</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-primary text-white text-center">
+                <div class="card-body">
+                    <h6>Total Revenue</h6>
+                    <h2>BD @totalRevenue.ToString("F2")</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-danger text-white text-center">
+                <div class="card-body">
+                    <h6>Overdue Payments</h6>
+                    <h2>@overdue</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Tenant</th>
+                        <th>Unit</th>
+                        <th>Building</th>
+                        <th>Monthly Rent</th>
+                        <th>Total Paid</th>
+                        <th>Status</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Overdue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var l in Model)
+                    {
+                        <tr class="@(l.HasOverduePayments ? "table-danger" : "")">
+                            <td>@l.TenantName</td>
+                            <td>@l.UnitNumber</td>
+                            <td>@l.BuildingName</td>
+                            <td>BD @l.MonthlyRent</td>
+                            <td>BD @l.TotalPaid</td>
+                            <td>
+                                <span class="badge
+                                        @(l.Status == "Active" ? "bg-success" :
+                                                                            l.Status == "Terminated" ? "bg-danger" :
+                                                                            "bg-secondary")">
+                                @l.Status
+                            </span>
+                        </td>
+                        <td>@l.StartDate.ToShortDateString()</td>
+                        <td>@l.EndDate.ToShortDateString()</td>
+                        <td>
+                            @if (l.HasOverduePayments)
+                                {
+                                    <span class="badge bg-danger">⚠️ Yes</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">✅ No</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

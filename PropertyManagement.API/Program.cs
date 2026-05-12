@@ -2,21 +2,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using PropertyManagement.API.Data;
-using System.Text;
-using System.Reflection;
-using Microsoft.Extensions.Logging;
+using PropertyManagement.API.Hubs;
 using PropertyManagement.API.Services;
 using PropertyManagement.API.Services.Interfaces;
-using PropertyManagement.API.Hubs;
-
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
@@ -30,7 +29,9 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "https://localhost:7002",
-            "http://localhost:5002")
+            "http://localhost:5002",
+            "https://localhost:7003",
+            "http://localhost:5003")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -58,73 +59,65 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Register Services
+// Services
 builder.Services.AddScoped<IBuildingService, BuildingService>();
 builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
 builder.Services.AddScoped<ILeaseService, LeaseService>();
 
-builder.Services.AddControllers();
+// SignalR
 builder.Services.AddSignalR();
 
+// Controllers + Swagger
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Property Management API",
+        Version = "v1"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization: Bearer {token}",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new List<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json",
+            "Property Management API v1");
+    });
+}
 
 app.UseHttpsRedirection();
+app.UseCors("AllowMVC");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("AllowMVC");
-
-// Diagnostic wrapper: catch ReflectionTypeLoadException and log LoaderExceptions + assemblies that fail GetTypes()
-try
-{
-    app.MapControllers();
-}
-catch (ReflectionTypeLoadException ex)
-{
-    var logger = app.Logger;
-
-    logger.LogError("ReflectionTypeLoadException while mapping controllers: {Message}", ex.Message);
-
-    if (ex.LoaderExceptions != null)
-    {
-        foreach (var le in ex.LoaderExceptions)
-        {
-            if (le == null) continue;
-            logger.LogError("LoaderException: {Type} - {Message}", le.GetType().FullName, le.Message);
-            logger.LogError(le.StackTrace);
-        }
-    }
-
-    // Extra diagnostics: find assemblies that throw when enumerating types
-    foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
-    {
-        try
-        {
-            // Force type enumeration to catch TypeLoadException / BadImageFormatException thrown by problematic assemblies
-            var types = asm.GetTypes();
-        }
-        catch (Exception aex)
-        {
-            logger.LogError("Assembly '{Name}' threw while GetTypes(): {Type} - {Message}", asm.FullName, aex.GetType().FullName, aex.Message);
-            logger.LogError(aex.StackTrace);
-        }
-    }
-
-    // Re-throw so the process still fails (unless you want to continue)
-    throw;
-}
-
-if (app.Environment.IsDevelopment())
- {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.MapControllers();
+app.MapHub<MaintenanceHub>("/hubs/maintenance");
 
 app.Run();

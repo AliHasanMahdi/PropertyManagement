@@ -50,9 +50,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[2.2.0, )"
             }
           },
           "imports": [

@@ -1,0 +1,61 @@
+﻿@model List<PropertyManagement.Reporting.Models.BuildingModel>
+@{
+    ViewData["Title"] = "Occupancy Report";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🏗️ Occupancy Report</h2>
+        <a asp-action="Dashboard" class="btn btn-secondary">← Back</a>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Building</th>
+                        <th>City</th>
+                        <th>Type</th>
+                        <th>Total Units</th>
+                        <th>Available</th>
+                        <th>Occupied</th>
+                        <th>Occupancy Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model)
+                    {
+                        var occupied = b.TotalUnits - b.AvailableUnits;
+                        var rate = b.TotalUnits > 0
+                        ? (double)occupied / b.TotalUnits * 100 : 0;
+                        <tr>
+                            <td>@b.Name</td>
+                            <td>@b.City</td>
+                            <td>@b.Type</td>
+                            <td>@b.TotalUnits</td>
+                            <td>
+                                <span class="badge bg-success">
+                                    @b.AvailableUnits
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-danger">
+                                    @occupied
+                                </span>
+                            </td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary"
+                                         style="width: @rate%">
+                                        @rate.ToString("F1")%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

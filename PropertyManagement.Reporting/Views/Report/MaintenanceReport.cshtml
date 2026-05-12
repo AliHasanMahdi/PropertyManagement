@@ -1,0 +1,105 @@
+﻿@model List<PropertyManagement.Reporting.Models.MaintenanceModel>
+@{
+    ViewData["Title"] = "Maintenance Report";
+    var resolved = Model.Count(m => m.Status == "Resolved");
+    var pending = Model.Count(m => m.Status == "Submitted");
+    var avgResolution = Model
+        .Where(m => m.ResolvedAt.HasValue)
+        .Select(m => (m.ResolvedAt!.Value - m.CreatedAt).TotalHours)
+        .DefaultIfEmpty(0)
+        .Average();
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🔧 Maintenance Report</h2>
+        <a asp-action="Dashboard" class="btn btn-secondary">← Back</a>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white text-center">
+                <div class="card-body">
+                    <h6>Total</h6>
+                    <h2>@Model.Count</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white text-center">
+                <div class="card-body">
+                    <h6>Pending</h6>
+                    <h2>@pending</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white text-center">
+                <div class="card-body">
+                    <h6>Resolved</h6>
+                    <h2>@resolved</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white text-center">
+                <div class="card-body">
+                    <h6>Avg Resolution</h6>
+                    <h2>@avgResolution.ToString("F1")h</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Tenant</th>
+                        <th>Assigned To</th>
+                        <th>Created</th>
+                        <th>Resolved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td>@r.TicketNumber</td>
+                            <td>@r.Title</td>
+                            <td>@r.Category</td>
+                            <td>
+                                <span class="badge
+                                        @(r.Priority == "Urgent" ? "bg-danger" :
+                                                                            r.Priority == "High" ? "bg-warning" :
+                                                                            "bg-secondary")">
+                                                                                         @r.Priority
+                                                                                     </span>
+                                                                                 </td>
+                                                                                 <td>
+                                                                                     <span class="badge
+                                        @(r.Status == "Resolved" ? "bg-success" :
+                                                                            r.Status == "Submitted" ? "bg-warning" :
+                                                                            "bg-info")">
+                                @r.Status
+                            </span>
+                        </td>
+                        <td>@r.TenantName</td>
+                        <td>@(r.AssignedStaffName ?? "Unassigned")</td>
+                        <td>@r.CreatedAt.ToShortDateString()</td>
+                        <td>
+                            @(r.ResolvedAt?.ToShortDateString() ?? "-")
+                        </td>
+                    </tr>
+                                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

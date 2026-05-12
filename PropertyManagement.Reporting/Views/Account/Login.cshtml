@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4>📊 Property Management Reports</h4>
+                    <p class="mb-0">Sign in to access reports</p>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" asp-action="Login">
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger"></div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email"
+                                   class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password"
+                                   class="form-control" required />
+                        </div>
+                        <button type="submit"
+                                class="btn btn-dark w-100">
+                            Login to Reports
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="alert alert-info mt-3">
+                <small>
+                    ⚠️ This portal is restricted to
+                    <strong>Property Managers</strong> only
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
