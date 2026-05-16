@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PropertyManagement.API.Models.MaintenanceRequest>
+@{
+    ViewData["Title"] = "My Assigned Requests";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📋 My Assigned Requests</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <div class="mb-3">
+                <a asp-action="Dashboard" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th>Title</th>
+                            <th>Unit</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><small class="text-muted">@item.TicketNumber</small></td>
+                                <td><strong>@item.Title</strong></td>
+                                <td>@item.Unit?.UnitNumber</td>
+                                <td>@item.Priority</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Details</a>
+
+                                    @if (item.Status == "Assigned")
+                                    {
+                                        <form asp-action="StartWork" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-primary">Start Work</button>
+                                        </form>
+                                    }
+                                    else if (item.Status == "InProgress")
+                                    {
+                                        <form asp-action="Resolve" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-success">Resolve</button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-3">No tasks found matching your workspace.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
