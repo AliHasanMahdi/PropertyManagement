@@ -1,25 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Project\\PropertyManagement\\",
+  "WorkspaceRootPath": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\202202670\\desktop\\propertymanagement-main\\propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70F01A21-313E-4FDE-B67A-9828C6B8002A}|PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj|d:\\project\\propertymanagement\\propertymanagement.reporting\\propertymanagement.reporting.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{70F01A21-313E-4FDE-B67A-9828C6B8002A}|PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj|solutionrelative:propertymanagement.reporting\\propertymanagement.reporting.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|d:\\project\\propertymanagement\\propertymanagement.mvc\\propertymanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\propertymanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|d:\\project\\propertymanagement\\propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|c:\\users\\202202670\\desktop\\propertymanagement-main\\propertymanagement.api\\models\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\models\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,69 +18,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Microsoft.PackageDependencyResolution.targets",
-              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
-              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.PackageDependencyResolution.targets",
-              "ViewState": "AgIAAPoAAAAAAAAAAAAvwAkBAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-05-12T21:15:36.966Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.MVC\\Program.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Program.cs",
+              "ToolTip": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.MVC\\Program.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T04:57:35.413Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PropertyManagement.Reporting.csproj",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-              "RelativeDocumentMoniker": "PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-              "RelativeToolTip": "PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-12T21:14:05.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PropertyManagement.MVC.csproj",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "RelativeToolTip": "PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-12T21:13:38.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PropertyManagement.API.csproj",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\PropertyManagement.API.csproj",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
-              "RelativeToolTip": "PropertyManagement.API\\PropertyManagement.API.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-12T21:11:31.218Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\Program.cs",
-              "ToolTip": "D:\\Project\\PropertyManagement\\PropertyManagement.API\\Program.cs",
-              "RelativeToolTip": "PropertyManagement.API\\Program.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAFwAAAAwAAAAAAAAAA==",
+              "Title": "DbSeeder.cs",
+              "DocumentMoniker": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.API\\Models\\DbSeeder.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Models\\DbSeeder.cs",
+              "ToolTip": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.API\\Models\\DbSeeder.cs",
+              "RelativeToolTip": "PropertyManagement.API\\Models\\DbSeeder.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAkwFIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T21:00:00.24Z"
+              "WhenOpened": "2026-05-17T04:48:26.813Z"
             }
           ]
         }

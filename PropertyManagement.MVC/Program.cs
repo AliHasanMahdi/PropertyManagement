@@ -8,9 +8,14 @@ using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Database - using API project's DbContext
+// Database
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(10),
+            errorNumbersToAdd: null)));
 
 // Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
