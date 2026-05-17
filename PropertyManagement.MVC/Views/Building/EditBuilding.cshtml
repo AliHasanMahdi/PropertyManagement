@@ -34,10 +34,20 @@
                     <span asp-validation-for="Address" class="text-danger small"></span>
                 </div>
 
+                <div class="mb-3">
+                    <label asp-for="City" class="form-label fw-bold">City</label>
+                    <input asp-for="City" class="form-control" placeholder="e.g. Manama" required />
+                    <span asp-validation-for="City" class="text-danger small"></span>
+                </div>
+
                 <div class="mb-4">
-                    <label asp-for="TotalUnits" class="form-label fw-bold">Total Units</label>
-                    <input asp-for="TotalUnits" class="form-control" type="number" min="1" required />
-                    <span asp-validation-for="TotalUnits" class="text-danger small"></span>
+                    <label asp-for="Type" class="form-label fw-bold">Building Type</label>
+                    <select asp-for="Type" class="form-select" required>
+                        <option value="">-- Select Type --</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger small"></span>
                 </div>
 
                 <div>
