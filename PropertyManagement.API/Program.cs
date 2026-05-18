@@ -28,15 +28,16 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowMVC", policy =>
     {
         policy.WithOrigins(
-           "https://localhost:7166",
-            "https://localhost:7002",  // ← replace with your MVC port
-            "https://localhost:7003",  // ← replace with your Reporting port
-            "http://localhost:5106",
-            "http://localhost:5002",
-            "http://localhost:5003")
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
+    "https://localhost:7166",
+    "https://localhost:7236",   // MVC https port
+    "http://localhost:5187",    // MVC http port
+    "https://localhost:7003",
+    "http://localhost:5106",
+    "http://localhost:5002",
+    "http://localhost:5003")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials();
     });
 });
 

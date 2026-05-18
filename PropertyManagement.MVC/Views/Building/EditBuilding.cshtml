@@ -18,6 +18,7 @@
     <div class="card shadow">
         <div class="card-body">
 
+            @* this form posts to BuildingController.Edit (different from PropertyManagerController) *@
             <form asp-action="Edit" method="post">
 
                 <input type="hidden" asp-for="Id" />

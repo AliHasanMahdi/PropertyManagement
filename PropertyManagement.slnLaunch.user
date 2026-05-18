@@ -7,10 +7,6 @@
         "Action": "Start"
       },
       {
-        "Path": "PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-        "Action": "Start"
-      },
-      {
         "Path": "PropertyManagement.MVC\\PropertyManagement.MVC.csproj",
         "Action": "Start"
       }

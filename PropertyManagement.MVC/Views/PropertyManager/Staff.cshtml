@@ -21,6 +21,7 @@
                         <th>Phone</th>
                         <th>Skill</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,14 @@
                                 <span class="badge @(staff.AvailabilityStatus == "Available" ? "bg-success" : "bg-warning")">
                                     @staff.AvailabilityStatus
                                 </span>
+                            </td>
+                            <td>
+                                <a asp-action="EditStaff" asp-route-id="@staff.Id" class="btn btn-sm btn-warning">Edit</a>
+                                <form asp-action="DeleteStaff" method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this staff member?')">
+                                    <input type="hidden" name="id" value="@staff.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     }

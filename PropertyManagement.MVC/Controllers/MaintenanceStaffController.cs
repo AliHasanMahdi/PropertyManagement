@@ -21,6 +21,28 @@ namespace PropertyManagement.MVC.Controllers
             _context = context;
             _userManager = userManager;
         }
+        //fixing dashboard 
+        public async Task<IActionResult> Dashboard()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Challenge();
+
+            var staff = await _context.MaintenanceStaffs
+                .FirstOrDefaultAsync(s => s.Email == user.Email);
+
+            if (staff == null) return NotFound("Maintenance staff profile not found.");
+
+            ViewBag.PendingCount = await _context.MaintenanceRequests
+                .CountAsync(m => m.MaintenanceStaffId == staff.Id && m.Status == "Assigned");
+
+            ViewBag.InProgressCount = await _context.MaintenanceRequests
+                .CountAsync(m => m.MaintenanceStaffId == staff.Id && m.Status == "InProgress");
+
+            ViewBag.ResolvedCount = await _context.MaintenanceRequests
+                .CountAsync(m => m.MaintenanceStaffId == staff.Id && m.Status == "Resolved");
+
+            return View();
+        }
 
         // PAGE 1: Lists maintenance requests assigned to the currently logged-in maintenance staff
         // URL would be: /MaintenanceStaff/AssignedRequests
