@@ -247,6 +247,24 @@ namespace PropertyManagement.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Buildings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "101 Luxury Way",
+                            City = "Manama",
+                            Name = "Grandview Heights",
+                            Type = "Residential"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "202 Timber Lane",
+                            City = "Seef",
+                            Name = "Maple Wood Tower",
+                            Type = "Commercial"
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.Lease", b =>
@@ -283,6 +301,28 @@ namespace PropertyManagement.API.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("Leases");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndDate = new DateTime(2026, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthlyRent = 1200.00m,
+                            StartDate = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            TenantId = 1,
+                            UnitId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndDate = new DateTime(2027, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonthlyRent = 2450.00m,
+                            StartDate = new DateTime(2026, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Active",
+                            TenantId = 2,
+                            UnitId = 3
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.MaintenanceRequest", b =>
@@ -341,6 +381,36 @@ namespace PropertyManagement.API.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("MaintenanceRequests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Category = "Plumbing",
+                            CreatedAt = new DateTime(2026, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "The pipe below the kitchen sink is constantly dripping water onto the cabinet base.",
+                            MaintenanceStaffId = 1,
+                            Priority = "High",
+                            Status = "Assigned",
+                            TenantId = 1,
+                            TicketNumber = "TKT-1001",
+                            Title = "Leaky Kitchen Sink",
+                            UnitId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Category = "Electrical",
+                            CreatedAt = new DateTime(2026, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "The bedroom toggle switch clicks but the light fixtures do not respond.",
+                            MaintenanceStaffId = 1,
+                            Priority = "Medium",
+                            Status = "InProgress",
+                            TenantId = 2,
+                            TicketNumber = "TKT-1002",
+                            Title = "Broken Light Switch",
+                            UnitId = 3
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.MaintenanceStaff", b =>
@@ -374,6 +444,17 @@ namespace PropertyManagement.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MaintenanceStaffs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailabilityStatus = "Available",
+                            Email = "staff@example.com",
+                            FullName = "Bob Builder",
+                            Phone = "555-0122",
+                            SkillType = "Plumbing"
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.Notification", b =>
@@ -439,6 +520,26 @@ namespace PropertyManagement.API.Migrations
                     b.HasIndex("LeaseId");
 
                     b.ToTable("Payments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 1200.00m,
+                            LeaseId = 1,
+                            Notes = "Rent payment for May",
+                            PaymentDate = new DateTime(2026, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Paid"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 2450.00m,
+                            LeaseId = 2,
+                            Notes = "First month rent deposit",
+                            PaymentDate = new DateTime(2026, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = "Paid"
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.Tenant", b =>
@@ -471,6 +572,26 @@ namespace PropertyManagement.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CPR = "990112345",
+                            DateRegistered = new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "tenant1@example.com",
+                            FullName = "John Doe",
+                            Phone = "555-0199"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CPR = "950554321",
+                            DateRegistered = new DateTime(2026, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "tenant2@example.com",
+                            FullName = "Jane Smith",
+                            Phone = "555-0144"
+                        });
                 });
 
             modelBuilder.Entity("PropertyManagement.API.Models.Unit", b =>
@@ -511,6 +632,41 @@ namespace PropertyManagement.API.Migrations
                     b.HasIndex("BuildingId");
 
                     b.ToTable("Units");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amenities = "Balcony, AC",
+                            BuildingId = 1,
+                            Rent = 1200.00m,
+                            Size = 85.5,
+                            Status = "Occupied",
+                            Type = "Apartment",
+                            UnitNumber = "101A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amenities = "Furnished",
+                            BuildingId = 1,
+                            Rent = 1350.00m,
+                            Size = 45.0,
+                            Status = "Available",
+                            Type = "Studio",
+                            UnitNumber = "102B"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amenities = "Conference Room",
+                            BuildingId = 2,
+                            Rent = 2450.00m,
+                            Size = 120.0,
+                            Status = "Occupied",
+                            Type = "Office",
+                            UnitNumber = "201"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

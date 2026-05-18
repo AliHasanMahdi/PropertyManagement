@@ -1397,23 +1397,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\RANSOR FORCE 7 Elite\\.nuget\\packages\\": {},
+    "C:\\Users\\202202670\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
+      "projectUniqueName": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
       "projectName": "PropertyManagement.Reporting",
-      "projectPath": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
-      "packagesPath": "C:\\Users\\RANSOR FORCE 7 Elite\\.nuget\\packages\\",
-      "outputPath": "D:\\Project\\PropertyManagement\\PropertyManagement.Reporting\\obj\\",
+      "projectPath": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.Reporting\\PropertyManagement.Reporting.csproj",
+      "packagesPath": "C:\\Users\\202202670\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.Reporting\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\RANSOR FORCE 7 Elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\202202670\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1470,7 +1470,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

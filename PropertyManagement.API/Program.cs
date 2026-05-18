@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -28,9 +28,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowMVC", policy =>
     {
         policy.WithOrigins(
-            "https://localhost:7002",
+           "https://localhost:7166",
+            "https://localhost:7002",  // ← replace with your MVC port
+            "https://localhost:7003",  // ← replace with your Reporting port
+            "http://localhost:5106",
             "http://localhost:5002",
-            "https://localhost:7003",
             "http://localhost:5003")
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -119,5 +121,22 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.MapHub<MaintenanceHub>("/hubs/maintenance");
+
+// Seed Database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await DbSeeder.SeedAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Error seeding database");
+    }
+}
 
 app.Run();

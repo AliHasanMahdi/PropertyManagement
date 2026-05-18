@@ -1,0 +1,36 @@
+﻿@{
+    // Razor configuration: sets the browser tab title
+    ViewData["Title"] = "Maintenance Dashboard";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">⚙️ Maintenance Dashboard</h2>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <h5 class="mb-3">Overview Metrics</h5>
+            <p class="text-muted">Quick breakdown of current maintenance tasks assigned to your staff profile.</p>
+
+            <dl class="row mb-4">
+                <dt class="col-sm-3">Assigned Tasks</dt>
+                <dd class="col-sm-9">
+                    <span class="fw-bold">@ViewBag.PendingCount</span>
+                </dd>
+
+                <dt class="col-sm-3">In Progress</dt>
+                <dd class="col-sm-9">
+                    <span class="fw-bold">@ViewBag.InProgressCount</span>
+                </dd>
+
+                <dt class="col-sm-3">Resolved (Total)</dt>
+                <dd class="col-sm-9">
+                    <span class="fw-bold">@ViewBag.ResolvedCount</span>
+                </dd>
+            </dl>
+
+            <div>
+                <a asp-action="AssignedRequests" class="btn btn-primary">View Assigned Requests</a>
+            </div>
+        </div>
+    </div>
+</div>
