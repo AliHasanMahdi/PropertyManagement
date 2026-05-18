@@ -1,14 +1,87 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\",
+  "WorkspaceRootPath": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\202202670\\desktop\\propertymanagement-main\\propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\editstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\editstaff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|c:\\users\\202202670\\desktop\\propertymanagement-main\\propertymanagement.api\\models\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\models\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\editbuilding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\editbuilding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\pages\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\edittenant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\edittenant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\editunit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\editunit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\controllers\\propertymanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\controllers\\propertymanagercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\building\\editbuilding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\building\\editbuilding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\maintenanceboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\maintenanceboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\controllers\\maintenancestaffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\controllers\\maintenancestaffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\views\\propertymanager\\tenants.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\views\\propertymanager\\tenants.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\pages\\tracking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\pages\\tracking\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rashed\\AppData\\Local\\Temp\\fhd3rjlf..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.mvc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9A2E1E90-9F88-4B9F-A9AD-AD791EEB0525}|PropertyManagement.MVC\\PropertyManagement.MVC.csproj|solutionrelative:propertymanagement.mvc\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|c:\\users\\rashed\\source\\repos\\alihasanmahdi\\propertymanagement\\propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8BD56D1C-BDC3-4DC6-8EC4-CB09EF82BA37}|PropertyManagement.API\\PropertyManagement.API.csproj|solutionrelative:propertymanagement.api\\propertymanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rashed\\AppData\\Local\\Temp\\fhd3rjlf..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Rashed\\AppData\\Local\\Temp\\fhd3rjlf..sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +91,264 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Pages\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Pages\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Pages\\_ViewImports.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Pages\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T17:05:04.901Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.MVC\\Program.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Program.cs",
-              "ToolTip": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.MVC\\Program.cs",
-              "RelativeToolTip": "PropertyManagement.MVC\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\Program.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\Program.cs",
+              "RelativeToolTip": "PropertyManagement.API\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-17T04:57:35.413Z",
+              "WhenOpened": "2026-05-18T17:02:11.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EditBuilding.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\Building\\EditBuilding.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\Building\\EditBuilding.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\Building\\EditBuilding.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\Building\\EditBuilding.cshtml",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAEQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:41:07.077Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DbSeeder.cs",
-              "DocumentMoniker": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.API\\Models\\DbSeeder.cs",
-              "RelativeDocumentMoniker": "PropertyManagement.API\\Models\\DbSeeder.cs",
-              "ToolTip": "C:\\Users\\202202670\\Desktop\\PropertyManagement-main\\PropertyManagement.API\\Models\\DbSeeder.cs",
-              "RelativeToolTip": "PropertyManagement.API\\Models\\DbSeeder.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAkwFIAAAABAAAAAAAAAA==",
+              "Title": "EditBuilding.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditBuilding.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\EditBuilding.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditBuilding.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\EditBuilding.cshtml",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAAC0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:19:26.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EditStaff.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditStaff.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\EditStaff.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditStaff.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\EditStaff.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAYwEEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:18:57.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditTenant.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditTenant.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\EditTenant.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditTenant.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\EditTenant.cshtml",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAD8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:18:15.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Staff.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Staff.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\Staff.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Staff.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\Staff.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:16:23.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Tenants.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Tenants.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\Tenants.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\Tenants.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\Tenants.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACkAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:15:19.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PropertyManagerController.cs",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Controllers\\PropertyManagerController.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAswGAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-17T04:48:26.813Z"
+              "WhenOpened": "2026-05-18T16:12:36.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EditUnit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditUnit.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\EditUnit.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\EditUnit.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\EditUnit.cshtml",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:20:21.596Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Pages\\Tracking\\Index.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Pages\\Tracking\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Pages\\Tracking\\Index.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Pages\\Tracking\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:11:45.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MaintenanceStaffController.cs",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\MaintenanceStaffController.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Controllers\\MaintenanceStaffController.cs",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\MaintenanceStaffController.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Controllers\\MaintenanceStaffController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAuwBcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T15:09:05.223Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MaintenanceBoard.cshtml",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "RelativeToolTip": "PropertyManagement.MVC\\Views\\PropertyManager\\MaintenanceBoard.cshtml",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAmwEIAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T16:08:59.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "PropertyManagement.MVC\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T15:56:11.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SQLQuery1.sql ",
+              "DocumentMoniker": "C:\\Users\\Rashed\\AppData\\Local\\Temp\\fhd3rjlf..sql",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\Temp\\fhd3rjlf..sql",
+              "ToolTip": "SQLQuery1.sql *",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-05-18T15:15:09.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\appsettings.json",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\appsettings.json",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\appsettings.json",
+              "RelativeToolTip": "PropertyManagement.MVC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T14:35:55.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PropertyManagement.MVC\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.MVC\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PropertyManagement.MVC\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T14:35:48.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PropertyManagement.API",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\PropertyManagement.API.csproj",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\PropertyManagement.API.csproj",
+              "RelativeToolTip": "PropertyManagement.API\\PropertyManagement.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-18T14:30:46.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PropertyManagement.API\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Rashed\\source\\repos\\AliHasanMahdi\\PropertyManagement\\PropertyManagement.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PropertyManagement.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-18T14:27:21.502Z",
+              "EditorCaption": ""
             }
           ]
         }

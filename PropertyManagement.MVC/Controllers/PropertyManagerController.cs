@@ -71,12 +71,24 @@ namespace PropertyManagement.MVC.Controllers
             return View(building);
         }
 
+        // replace the EditBuilding POST
         [HttpPost]
         public async Task<IActionResult> EditBuilding(Building building)
         {
+            // the Building model has a Units list that the form doesnt send
+            // so we remove it from model state otherwise IsValid is always false
+            ModelState.Remove("Units");
+
             if (ModelState.IsValid)
             {
-                _context.Entry(building).State = EntityState.Modified;
+                var existing = await _context.Buildings.FindAsync(building.Id);
+                if (existing == null) return NotFound();
+
+                existing.Name = building.Name;
+                existing.Address = building.Address;
+                existing.City = building.City;
+                existing.Type = building.Type;
+
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Building updated successfully!";
                 return RedirectToAction("Buildings");
@@ -144,12 +156,28 @@ namespace PropertyManagement.MVC.Controllers
             return View(unit);
         }
 
+        // replace the EditUnit POST
         [HttpPost]
         public async Task<IActionResult> EditUnit(Unit unit)
         {
+            // Unit model has Building, Leases, MaintenanceRequests nav properties
+            // none of them are in the form so we clear them from model state
+            ModelState.Remove("Building");
+            ModelState.Remove("Leases");
+            ModelState.Remove("MaintenanceRequests");
+
             if (ModelState.IsValid)
             {
-                _context.Entry(unit).State = EntityState.Modified;
+                var existing = await _context.Units.FindAsync(unit.Id);
+                if (existing == null) return NotFound();
+
+                existing.UnitNumber = unit.UnitNumber;
+                existing.BuildingId = unit.BuildingId;
+                existing.Type = unit.Type;
+                existing.Size = unit.Size;
+                existing.Rent = unit.Rent;
+                existing.Amenities = unit.Amenities;
+
                 await _context.SaveChangesAsync();
                 TempData["Success"] = "Unit updated successfully!";
                 return RedirectToAction("Units");
@@ -201,6 +229,54 @@ namespace PropertyManagement.MVC.Controllers
             return RedirectToAction("Tenants");
         }
 
+        // load the tenant we want to edit based on the id from the url
+        public async Task<IActionResult> EditTenant(int id)
+        {
+            // look it up in the database
+            var tenant = await _context.Tenants.FindAsync(id);
+
+            // if nothing was found just return a 404 page
+            if (tenant == null) return NotFound();
+
+            // pass the tenant data to the edit form
+            return View(tenant);
+        }
+
+        // this runs when the user clicks Save on the edit form
+        [HttpPost]
+        public async Task<IActionResult> EditTenant(Tenant tenant)
+        {
+            // check if everything the user typed is valid
+            if (ModelState.IsValid)
+            {
+                // tell EF this record has been changed so it updates it in the db
+                _context.Entry(tenant).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Tenant updated successfully!";
+                return RedirectToAction("Tenants");
+            }
+
+            // if validation failed just show the form again with the errors
+            return View(tenant);
+        }
+
+        // delete a tenant by id
+        [HttpPost]
+        public async Task<IActionResult> DeleteTenant(int id)
+        {
+            var tenant = await _context.Tenants.FindAsync(id);
+
+            // only delete if we actually found something
+            if (tenant != null)
+            {
+                _context.Tenants.Remove(tenant);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Tenant deleted.";
+            }
+
+            return RedirectToAction("Tenants");
+        }
         // ==================== LEASES ====================
         public async Task<IActionResult> Leases()
         {
@@ -395,7 +471,47 @@ namespace PropertyManagement.MVC.Controllers
             TempData["Success"] = "Staff member added successfully!";
             return RedirectToAction("Staff");
         }
+        // load the staff member we want to edit
+        public async Task<IActionResult> EditStaff(int id)
+        {
+            var staff = await _context.MaintenanceStaffs.FindAsync(id);
 
+            if (staff == null) return NotFound();
+
+            return View(staff);
+        }
+
+        // save the changes from the edit form
+        [HttpPost]
+        public async Task<IActionResult> EditStaff(MaintenanceStaff staff)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(staff).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Staff member updated successfully!";
+                return RedirectToAction("Staff");
+            }
+
+            return View(staff);
+        }
+
+        // delete a staff member
+        [HttpPost]
+        public async Task<IActionResult> DeleteStaff(int id)
+        {
+            var staff = await _context.MaintenanceStaffs.FindAsync(id);
+
+            if (staff != null)
+            {
+                _context.MaintenanceStaffs.Remove(staff);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Staff member deleted.";
+            }
+
+            return RedirectToAction("Staff");
+        }
         public IActionResult MaintenanceBoard()
         {
             ViewBag.ApiBaseUrl = _configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7001";

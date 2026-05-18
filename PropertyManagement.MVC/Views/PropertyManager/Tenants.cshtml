@@ -22,6 +22,7 @@
                         <th>CPR</th>
                         <th>Leases</th>
                         <th>Registered</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,14 @@
                             <td>@tenant.CPR</td>
                             <td>@tenant.Leases.Count</td>
                             <td>@tenant.DateRegistered.ToShortDateString()</td>
+                            <td>
+                                <a asp-action="EditTenant" asp-route-id="@tenant.Id" class="btn btn-sm btn-warning">Edit</a>
+                                <form asp-action="DeleteTenant" method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this tenant?')">
+                                    <input type="hidden" name="id" value="@tenant.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

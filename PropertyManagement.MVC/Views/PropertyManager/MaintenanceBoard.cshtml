@@ -77,7 +77,8 @@
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
     <script>
-        const apiBaseUrl = "@(ViewBag.ApiBaseUrl ?? "https://localhost:7001")";
+                // strip the trailing slash if there is one, otherwise the url breaks with double //
+        const apiBaseUrl = "@(ViewBag.ApiBaseUrl ?? "https://localhost:7001")".replace(/\/$/, "");
         let requests = [];
 
         // Connect to SignalR Hub
