@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PropertyManagement.API.Data;
+using PropertyManagement.API.Models;
 using PropertyManagement.MVC.Services;
 using PropertyManagement.MVC.ViewModels.Account;
 
@@ -12,19 +15,22 @@ namespace PropertyManagement.MVC.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApiClientService _apiClient;
         private readonly TokenService _tokenService;
+        private readonly AppDbContext _context;
 
         public AccountController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ApiClientService apiClient,
-            TokenService tokenService)
+            TokenService tokenService,
+            AppDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _apiClient = apiClient;
             _tokenService = tokenService;
+            _context = context;
         }
 
         [HttpGet]
@@ -91,7 +97,39 @@ namespace PropertyManagement.MVC.Controllers
 
             if (result.Succeeded)
             {
+                // Assign the selected role to the new user
                 await _userManager.AddToRoleAsync(user, model.Role);
+
+                // If the user registered as MaintenanceStaff, create a matching
+                // MaintenanceStaff profile in the application's database. We link
+                // the Identity user to the MaintenanceStaff row by email because
+                // this avoids schema or migration changes and keeps the mapping
+                // simple and robust across the existing codebase which looks up
+                // MaintenanceStaff by email.
+                if (model.Role == "MaintenanceStaff")
+                {
+                    // Prevent duplicate MaintenanceStaff records by checking email
+                    var exists = await _context.MaintenanceStaffs
+                        .AnyAsync(s => s.Email == model.Email);
+                    if (!exists)
+                    {
+                        var staff = new MaintenanceStaff
+                        {
+                            Email = model.Email,
+                            // No full name field on registration form; use the email
+                            // as a reasonable default. Teams may extend the form later.
+                            FullName = model.Email,
+                            SkillType = "General",
+                            AvailabilityStatus = "Available",
+                            Phone = string.Empty
+                        };
+
+                        // Create and save the MaintenanceStaff profile
+                        _context.MaintenanceStaffs.Add(staff);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
                 TempData["Success"] = "Account created! Please login.";
                 return RedirectToAction("Login");
             }
