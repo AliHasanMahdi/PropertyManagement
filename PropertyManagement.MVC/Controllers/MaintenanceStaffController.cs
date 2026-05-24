@@ -30,7 +30,20 @@ namespace PropertyManagement.MVC.Controllers
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
 
-            if (staff == null) return NotFound("Maintenance staff profile not found.");
+            // Auto-create profile if missing (handles seed data mismatch or new registrations)
+            if (staff == null)
+            {
+                staff = new PropertyManagement.API.Models.MaintenanceStaff
+                {
+                    FullName          = user.Email ?? "Staff",
+                    Email             = user.Email ?? string.Empty,
+                    Phone             = string.Empty,
+                    SkillType         = "General",
+                    AvailabilityStatus = "Available"
+                };
+                _context.MaintenanceStaffs.Add(staff);
+                await _context.SaveChangesAsync();
+            }
 
             ViewBag.PendingCount = await _context.MaintenanceRequests
                 .CountAsync(m => m.MaintenanceStaffId == staff.Id && m.Status == "Assigned");
@@ -55,7 +68,19 @@ namespace PropertyManagement.MVC.Controllers
             // 2. Find this person's record in the MaintenanceStaffs table using their email
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return NotFound("Maintenance staff profile not found."); // Uh oh, they are a user but don't have a staff profile
+            if (staff == null)
+            {
+                staff = new PropertyManagement.API.Models.MaintenanceStaff
+                {
+                    FullName          = user.Email ?? "Staff",
+                    Email             = user.Email ?? string.Empty,
+                    Phone             = string.Empty,
+                    SkillType         = "General",
+                    AvailabilityStatus = "Available"
+                };
+                _context.MaintenanceStaffs.Add(staff);
+                await _context.SaveChangesAsync();
+            }
 
             // 3. Go to the MaintenanceRequests table and grab all jobs assigned to this specific staff ID
             var requests = await _context.MaintenanceRequests
@@ -80,7 +105,7 @@ namespace PropertyManagement.MVC.Controllers
             // Find their staff profile again
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return NotFound("Maintenance staff profile not found.");
+            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
 
             // Find the specific request matching the ID from the URL *AND* make sure it belongs to this staff member
             var request = await _context.MaintenanceRequests
@@ -107,7 +132,7 @@ namespace PropertyManagement.MVC.Controllers
 
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return NotFound("Maintenance staff profile not found.");
+            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
 
             // Find the ticket by its ID
             var request = await _context.MaintenanceRequests.FindAsync(id);
@@ -141,7 +166,7 @@ namespace PropertyManagement.MVC.Controllers
 
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return NotFound("Maintenance staff profile not found.");
+            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
 
             var request = await _context.MaintenanceRequests.FindAsync(id);
             if (request == null || request.MaintenanceStaffId != staff.Id) return NotFound();
@@ -163,5 +188,11 @@ namespace PropertyManagement.MVC.Controllers
             TempData["Success"] = "Request resolved successfully.";
             return RedirectToAction("AssignedRequests"); // Send them back to their dashboard list
         }
+        // Alias so the navbar link /MaintenanceStaff/MyRequests works
+        public async Task<IActionResult> MyRequests()
+        {
+            return await AssignedRequests();
+        }
+
     }
 }

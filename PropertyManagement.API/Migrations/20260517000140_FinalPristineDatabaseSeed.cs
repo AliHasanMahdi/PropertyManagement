@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -25,7 +25,7 @@ namespace PropertyManagement.API.Migrations
             migrationBuilder.InsertData(
                 table: "MaintenanceStaffs",
                 columns: new[] { "Id", "AvailabilityStatus", "Email", "FullName", "Phone", "SkillType" },
-                values: new object[] { 1, "Available", "staff@example.com", "Bob Builder", "555-0122", "Plumbing" });
+                values: new object[] { 1, "Available", "staff@property.com", "Bob Builder", "555-0122", "Plumbing" });
 
             migrationBuilder.InsertData(
                 table: "Tenants",

@@ -1,25 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PropertyManagement.API.Models;
+using PropertyManagement.MVC.Services;
 using System.Text;
 using System.Text.Json;
-using PropertyManagement.API.Models; // Grabs your shared Building model structure
 
 namespace PropertyManagement.MVC.Controllers
 {
+    [Authorize(Roles = "PropertyManager")]
     public class BuildingController : Controller
     {
         private readonly IHttpClientFactory _clientFactory;
+        private readonly TokenService _tokenService;
 
-        // Constructor: Inject HttpClientFactory so we can spin up HTTP clients to talk to our API
-        public BuildingController(IHttpClientFactory clientFactory)
+        public BuildingController(IHttpClientFactory clientFactory, TokenService tokenService)
         {
             _clientFactory = clientFactory;
+            _tokenService  = tokenService;
         }
 
-        // Helper Method: Keeps our code DRY (Don't Repeat Yourself) by creating a configured HTTP client
+        // Creates an API client with the current user's JWT attached as a Bearer token
         private HttpClient GetApiClient()
         {
-            // Creates a client named "API" which reads the BaseUrl from appsettings.json
-            return _clientFactory.CreateClient("API");
+            var client = _clientFactory.CreateClient("API");
+            var token  = _tokenService.GetToken();
+            if (!string.IsNullOrEmpty(token))
+                client.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            return client;
         }
 
         // 1. GET: /Building (List all buildings)

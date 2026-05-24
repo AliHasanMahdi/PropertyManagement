@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PropertyManagement.API.Data;
 using PropertyManagement.API.Models;
+using Microsoft.AspNetCore.SignalR;
+using PropertyManagement.API.Hubs;
 using PropertyManagement.MVC.ViewModels.PropertyManager;
 
 namespace PropertyManagement.MVC.Controllers
@@ -13,11 +15,16 @@ namespace PropertyManagement.MVC.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHubContext<MaintenanceHub> _hubContext;
 
-        public PropertyManagerController(AppDbContext context, IConfiguration configuration)
+        public PropertyManagerController(
+            AppDbContext context,
+            IConfiguration configuration,
+            IHubContext<MaintenanceHub> hubContext)
         {
-            _context = context;
+            _context       = context;
             _configuration = configuration;
+            _hubContext    = hubContext;
         }
 
         // ==================== DASHBOARD ====================
@@ -246,18 +253,27 @@ namespace PropertyManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTenant(Tenant tenant)
         {
-            // check if everything the user typed is valid
+            // Remove nav props the form does not post – without this ModelState is always invalid
+            ModelState.Remove("Leases");
+            ModelState.Remove("MaintenanceRequests");
+            ModelState.Remove("Notifications");
+
             if (ModelState.IsValid)
             {
-                // tell EF this record has been changed so it updates it in the db
-                _context.Entry(tenant).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                // Fetch the tracked entity first so EF doesn't wipe navigation data
+                var existing = await _context.Tenants.FindAsync(tenant.Id);
+                if (existing == null) return NotFound();
 
+                existing.FullName = tenant.FullName;
+                existing.Email    = tenant.Email;
+                existing.Phone    = tenant.Phone;
+                existing.CPR      = tenant.CPR;
+
+                await _context.SaveChangesAsync();
                 TempData["Success"] = "Tenant updated successfully!";
                 return RedirectToAction("Tenants");
             }
 
-            // if validation failed just show the form again with the errors
             return View(tenant);
         }
 
@@ -387,6 +403,10 @@ namespace PropertyManagement.MVC.Controllers
                 .ThenInclude(u => u.Building)
                 .Include(m => m.MaintenanceStaff)
                 .ToListAsync();
+
+            // Required by the view to populate the staff assignment dropdown
+            ViewBag.Staff = await _context.MaintenanceStaffs.ToListAsync();
+
             return View(requests);
         }
 
@@ -412,6 +432,17 @@ namespace PropertyManagement.MVC.Controllers
                 _context.Notifications.Add(notification);
 
                 await _context.SaveChangesAsync();
+
+                // Broadcast the assignment to the live maintenance board
+                await _hubContext.Clients.Group("MaintenanceBoard")
+                    .SendAsync("StaffAssigned", new
+                    {
+                        request.Id,
+                        request.TicketNumber,
+                        request.Status,
+                        AssignedStaffName = staff.FullName
+                    });
+
                 TempData["Success"] = "Staff assigned successfully!";
             }
             return RedirectToAction("MaintenanceRequests");
@@ -424,6 +455,14 @@ namespace PropertyManagement.MVC.Controllers
                 .Include(p => p.Lease)
                 .ThenInclude(l => l.Tenant)
                 .ToListAsync();
+
+            // Required by the Add Payment form in the view
+            ViewBag.Leases = await _context.Leases
+                .Include(l => l.Tenant)
+                .Include(l => l.Unit)
+                .Where(l => l.Status == "Active")
+                .ToListAsync();
+
             return View(payments);
         }
 
@@ -485,11 +524,23 @@ namespace PropertyManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditStaff(MaintenanceStaff staff)
         {
+            // Remove nav props the form does not post
+            ModelState.Remove("MaintenanceRequests");
+            ModelState.Remove("Notifications");
+
             if (ModelState.IsValid)
             {
-                _context.Entry(staff).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                // Fetch the tracked entity so EF doesn't overwrite nav data
+                var existing = await _context.MaintenanceStaffs.FindAsync(staff.Id);
+                if (existing == null) return NotFound();
 
+                existing.FullName           = staff.FullName;
+                existing.Email              = staff.Email;
+                existing.Phone              = staff.Phone;
+                existing.SkillType          = staff.SkillType;
+                existing.AvailabilityStatus = staff.AvailabilityStatus;
+
+                await _context.SaveChangesAsync();
                 TempData["Success"] = "Staff member updated successfully!";
                 return RedirectToAction("Staff");
             }

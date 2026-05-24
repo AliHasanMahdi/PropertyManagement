@@ -103,7 +103,7 @@ namespace PropertyManagement.API.Controllers
                         {
                             Id = latestLease.Unit.Id,
                             UnitNumber = latestLease.Unit.UnitNumber,
-                            Building = new { Id = latestLease.Unit.Building.Id, Name = latestLease.Unit.Building.Name }
+                            Building = latestLease.Unit.Building == null ? null : (object)new { Id = latestLease.Unit.Building.Id, Name = latestLease.Unit.Building.Name }
                         }
                     },
                     notifications = tenant.Notifications.Select(n => new { n.Id, n.Message, CreatedAt = n.CreatedAt })

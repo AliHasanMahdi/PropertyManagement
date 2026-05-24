@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PropertyManagement.API.Data;
+using Microsoft.AspNetCore.DataProtection;
+using PropertyManagement.API.Hubs;
 using PropertyManagement.MVC.Services;
 using System;
 using System.Linq;
@@ -48,6 +50,24 @@ builder.Services.AddHttpClient("API", client =>
 });
 
 builder.Services.AddControllersWithViews();
+
+// Register SignalR so PropertyManagerController can inject IHubContext<MaintenanceHub>
+// The MVC app broadcasts status updates to the live maintenance board
+builder.Services.AddSignalR();
+
+// Persist Data Protection keys to the database so authentication cookies
+// survive Azure App Service restarts and scale-out across multiple instances
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDataProtection()
+        .PersistKeysToDbContext<AppDbContext>()
+        .SetApplicationName("PropertyManagement");
+}
+else
+{
+    builder.Services.AddDataProtection()
+        .SetApplicationName("PropertyManagement");
+}
 builder.Services.AddRazorPages();
 
 // Token and API services
@@ -56,6 +76,21 @@ builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<ApiClientService>();
 
 var app = builder.Build();
+
+// Apply pending migrations automatically on startup (safe for Azure cold-start)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    try
+    {
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Error applying database migrations in MVC");
+    }
+}
 
 // Seed default roles and admin user (safe, idempotent)
 using (var scope = app.Services.CreateScope())
@@ -115,6 +150,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapHub<MaintenanceHub>("/hubs/maintenance");  // Required for SignalR board in MVC
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

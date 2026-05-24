@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Headers;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -48,7 +48,17 @@ namespace PropertyManagement.Reporting.Services
                     return (false, null, "Invalid credentials");
 
                 using var doc = JsonDocument.Parse(responseString);
-                var token = doc.RootElement.GetProperty("token").GetString();
+                var root  = doc.RootElement;
+                var token = root.GetProperty("token").GetString();
+
+                // Only Property Managers are allowed to use the reporting app
+                var roles = root.GetProperty("roles")
+                                .EnumerateArray()
+                                .Select(r => r.GetString() ?? "")
+                                .ToList();
+
+                if (!roles.Contains("PropertyManager"))
+                    return (false, null, "Access denied: only Property Managers can use this application.");
 
                 return (true, token, null);
             }

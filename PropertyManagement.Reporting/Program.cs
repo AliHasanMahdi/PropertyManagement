@@ -9,7 +9,11 @@ builder.Services.AddControllersWithViews();
 // HttpClient for API calls
 builder.Services.AddHttpClient("API", client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"]!);
+    var baseUrl = builder.Configuration["ApiSettings:BaseUrl"]
+                  ?? throw new InvalidOperationException(
+                      "ApiSettings:BaseUrl is not configured. " +
+                      "Set it in appsettings.json or as an Azure App Service environment variable.");
+    client.BaseAddress = new Uri(baseUrl);
 });
 
 // Cookie Authentication
@@ -21,12 +25,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromHours(8);
     });
 
+// Distributed memory cache required by Session middleware
+// Note: for multi-instance Azure deployments, replace with AddStackExchangeRedisCache
+builder.Services.AddDistributedMemoryCache();
+
 // Session for storing JWT token
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromHours(8);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    // SameAsRequest: uses HTTPS in production, HTTP in local dev
+    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
 });
 
 builder.Services.AddHttpContextAccessor();

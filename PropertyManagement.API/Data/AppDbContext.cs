@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.API.Models;
@@ -6,7 +7,7 @@ using System;
 
 namespace PropertyManagement.API.Data
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<IdentityUser>, IDataProtectionKeyContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -20,6 +21,10 @@ namespace PropertyManagement.API.Data
         public DbSet<MaintenanceStaff> MaintenanceStaffs { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+
+        // Required by IDataProtectionKeyContext - stores auth key ring in the database
+        // so cookies survive Azure App Service restarts and scale-out
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -137,7 +142,7 @@ namespace PropertyManagement.API.Data
 
             // E. Seed Maintenance Staff Profiles
             modelBuilder.Entity<MaintenanceStaff>().HasData(
-                new MaintenanceStaff { Id = 1, FullName = "Bob Builder", Email = "staff@example.com", Phone = "555-0122", SkillType = "Plumbing", AvailabilityStatus = "Available" }
+                new MaintenanceStaff { Id = 1, FullName = "Bob Builder", Email = "staff@property.com", Phone = "555-0122", SkillType = "Plumbing", AvailabilityStatus = "Available" }
             );
 
             // F. Seed Maintenance Requests (TicketNumber, Title, Description, Category, Priority, Status, CreatedAt)

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -98,16 +98,30 @@ namespace PropertyManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMaintenanceRequest(MaintenanceRequest request)
         {
+            // Remove nav-prop entries that the form never posts so IsValid works correctly
+            ModelState.Remove("Tenant");
+            ModelState.Remove("Unit");
+            ModelState.Remove("MaintenanceStaff");
+
             var user = await _userManager.GetUserAsync(User);
             var tenant = await _context.Tenants
                 .FirstOrDefaultAsync(t => t.Email == user!.Email);
 
             if (tenant == null) return View("NoProfile");
 
-            request.TenantId = tenant.Id;
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Units = tenant.Leases
+                    .Where(l => l.Status == "Active")
+                    .Select(l => l.Unit)
+                    .ToList();
+                return View(request);
+            }
+
+            request.TenantId     = tenant.Id;
             request.TicketNumber = "TKT" + DateTime.Now.Ticks.ToString().Substring(0, 8);
-            request.CreatedAt = DateTime.Now;
-            request.Status = "Submitted";
+            request.CreatedAt    = DateTime.Now;
+            request.Status       = "Submitted";
 
             _context.MaintenanceRequests.Add(request);
             await _context.SaveChangesAsync();
@@ -115,5 +129,27 @@ namespace PropertyManagement.MVC.Controllers
             TempData["Success"] = $"Request submitted! Ticket: {request.TicketNumber}";
             return RedirectToAction("MaintenanceRequests");
         }
+        [HttpPost]
+        public async Task<IActionResult> MarkNotificationRead(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var tenant = await _context.Tenants
+                .FirstOrDefaultAsync(t => t.Email == user!.Email);
+
+            if (tenant != null)
+            {
+                var notification = await _context.Notifications
+                    .FirstOrDefaultAsync(n => n.Id == id && n.TenantId == tenant.Id);
+
+                if (notification != null)
+                {
+                    notification.IsRead = true;
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToAction("Dashboard");
+        }
+
     }
 }

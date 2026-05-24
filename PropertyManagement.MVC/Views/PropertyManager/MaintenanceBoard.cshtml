@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Live Maintenance Board";
 }
 
@@ -78,7 +78,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
     <script>
                 // strip the trailing slash if there is one, otherwise the url breaks with double //
-        const apiBaseUrl = "@(ViewBag.ApiBaseUrl ?? "https://localhost:7001")".replace(/\/$/, "");
+        const apiBaseUrl = "@(ViewBag.ApiBaseUrl ?? string.Empty)".replace(/\/$/, "");
         let requests = [];
 
         // Connect to SignalR Hub

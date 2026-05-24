@@ -1,48 +1,79 @@
 @page
 @model PropertyManagement.MVC.Pages.Tracking.IndexModel
 @{
-    ViewData["Title"] = "Public Tracking";
+    ViewData["Title"] = "Maintenance Request Lookup";
 }
 
-<h1>Public Tracking / Lookup</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">🔍 Maintenance Request Lookup</h4>
+                    <small>Track your maintenance request without logging in</small>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page="Index">
+                        <div class="mb-3">
+                            <label asp-for="Input.TicketNumber" class="form-label fw-bold"></label>
+                            <input asp-for="Input.TicketNumber" class="form-control"
+                                   placeholder="e.g. TKT-1001" />
+                            <span asp-validation-for="Input.TicketNumber" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Input.Phone" class="form-label fw-bold"></label>
+                            <input asp-for="Input.Phone" class="form-control"
+                                   placeholder="e.g. 555-0199" />
+                            <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100">🔎 Look Up Request</button>
+                    </form>
+                </div>
+            </div>
 
-<form method="post" asp-page="Index" class="mb-3">
-    <div class="mb-3">
-        <label asp-for="Input.Reference" class="form-label"></label>
-        <input asp-for="Input.Reference" class="form-control" />
-        <span asp-validation-for="Input.Reference" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Lookup</button>
-</form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
-
-@if (!string.IsNullOrEmpty(Model.Input.ErrorMessage))
-{
-    <div class="alert alert-danger" role="alert">
-        @Model.Input.ErrorMessage
-    </div>
-}
-else if (Model.Input.Found)
-{
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Tracking result</h5>
-            @if (!string.IsNullOrEmpty(Model.Input.JsonResult))
+            @if (!string.IsNullOrEmpty(Model.Input.ErrorMessage))
             {
-                <pre style="white-space: pre-wrap;">@Model.Input.JsonResult</pre>
+                <div class="alert alert-danger mt-3">❌ @Model.Input.ErrorMessage</div>
             }
-            else if (!string.IsNullOrEmpty(Model.Input.RawResult))
+            else if (Model.Input.Found && !string.IsNullOrEmpty(Model.Input.JsonResult))
             {
-                <pre style="white-space: pre-wrap;">@Model.Input.RawResult</pre>
-            }
-            else
-            {
-                <p>No content returned from API.</p>
+                @* Parse and display the result nicely *@
+                var result = System.Text.Json.JsonDocument.Parse(Model.Input.JsonResult).RootElement;
+                <div class="card mt-3 shadow border-success">
+                    <div class="card-header bg-success text-white">✅ Request Found</div>
+                    <div class="card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Ticket #</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("ticketNumber", out var tn) ? tn.GetString() : "-")</dd>
+                            <dt class="col-sm-4">Title</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("title", out var ti) ? ti.GetString() : "-")</dd>
+                            <dt class="col-sm-4">Category</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("category", out var cat) ? cat.GetString() : "-")</dd>
+                            <dt class="col-sm-4">Priority</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("priority", out var pri) ? pri.GetString() : "-")</dd>
+                            <dt class="col-sm-4">Status</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-info">
+                                    @(result.TryGetProperty("status", out var st) ? st.GetString() : "-")
+                                </span>
+                            </dd>
+                            <dt class="col-sm-4">Submitted</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("createdAt", out var ca) ? DateTime.Parse(ca.GetString()!).ToShortDateString() : "-")</dd>
+                            @if (result.TryGetProperty("resolvedAt", out var ra) && ra.ValueKind != System.Text.Json.JsonValueKind.Null)
+                            {
+                                <dt class="col-sm-4">Resolved</dt>
+                                <dd class="col-sm-8">@DateTime.Parse(ra.GetString()!).ToShortDateString()</dd>
+                            }
+                            <dt class="col-sm-4">Assigned To</dt>
+                            <dd class="col-sm-8">@(result.TryGetProperty("assignedStaffName", out var asn) && asn.ValueKind != System.Text.Json.JsonValueKind.Null ? asn.GetString() : "Pending assignment")</dd>
+                        </dl>
+                    </div>
+                </div>
             }
         </div>
     </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

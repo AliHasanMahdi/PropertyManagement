@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PropertyManagement.API.Models.Payment>
+@model IEnumerable<PropertyManagement.API.Models.Payment>
 @{
     ViewData["Title"] = "Payments";
 }
@@ -39,6 +39,42 @@
                     }
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- Add Payment Form -->
+    <div class="card shadow mt-4">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">💳 Record New Payment</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddPayment" method="post" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Lease</label>
+                    <select name="leaseId" class="form-select" required>
+                        <option value="">-- Select Lease --</option>
+                        @foreach (var lease in (ViewBag.Leases as IEnumerable<PropertyManagement.API.Models.Lease> ?? Enumerable.Empty<PropertyManagement.API.Models.Lease>()))
+                        {
+                            <option value="@lease.Id">
+                                @lease.Tenant?.FullName – Unit @lease.Unit?.UnitNumber (@lease.Status)
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Amount (BD)</label>
+                    <input type="number" name="amount" step="0.01" min="0.01"
+                           class="form-control" placeholder="0.00" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Notes</label>
+                    <input type="text" name="notes" class="form-control"
+                           placeholder="e.g. May rent" />
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button type="submit" class="btn btn-success w-100">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

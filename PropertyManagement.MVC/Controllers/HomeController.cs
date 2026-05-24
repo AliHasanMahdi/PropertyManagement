@@ -15,11 +15,16 @@ namespace PropertyManagement.MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            // Redirect logged-in users straight to their dashboard
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                if (User.IsInRole("PropertyManager"))
+                    return RedirectToAction("Dashboard", "PropertyManager");
+                if (User.IsInRole("MaintenanceStaff"))
+                    return RedirectToAction("Dashboard", "MaintenanceStaff");
+                if (User.IsInRole("Tenant"))
+                    return RedirectToAction("Dashboard", "Tenant");
+            }
             return View();
         }
 

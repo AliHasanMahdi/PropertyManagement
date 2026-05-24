@@ -1,4 +1,4 @@
-﻿@model PropertyManagement.API.Models.Tenant
+@model PropertyManagement.API.Models.Tenant
 @{
     ViewData["Title"] = "My Dashboard";
 }
@@ -70,7 +70,13 @@
             <h5>🔔 Recent Notifications</h5>
             @foreach (var n in ViewBag.Notifications)
             {
-                <div class="alert alert-info">@n.Message - <small>@n.CreatedAt.ToShortDateString()</small></div>
+                <div class="alert alert-info d-flex justify-content-between align-items-center">
+                    <span>@n.Message <small class="text-muted ms-2">@n.CreatedAt.ToShortDateString()</small></span>
+                    <form asp-action="MarkNotificationRead" method="post" class="ms-3 mb-0">
+                        <input type="hidden" name="id" value="@n.Id" />
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">✕ Dismiss</button>
+                    </form>
+                </div>
             }
         </div>
     }

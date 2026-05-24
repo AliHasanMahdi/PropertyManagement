@@ -4,15 +4,15 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">?? My Assigned Requests</h2>
+    <h2 class="mb-4">🔧 My Assigned Requests</h2>
 
     @if (TempData["Success"] != null)
     {
-        <div class="alert alert-success">? @TempData["Success"]</div>
+        <div class="alert alert-success">✅ @TempData["Success"]</div>
     }
     @if (TempData["Error"] != null)
     {
-        <div class="alert alert-danger">? @TempData["Error"]</div>
+        <div class="alert alert-danger">❌ @TempData["Error"]</div>
     }
 
     <div class="card shadow">
@@ -55,17 +55,25 @@
                                 {
                                     <form asp-action="StartWork" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="@req.Id" />
-                                        <button type="submit" class="btn btn-sm btn-primary">Start Work</button>
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-primary">▶ Start</button>
                                     </form>
                                 }
                                 else if (req.Status == "InProgress")
                                 {
                                     <form asp-action="Resolve" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="@req.Id" />
-                                        <button type="submit" class="btn btn-sm btn-success">Resolve</button>
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-success">✔ Resolve</button>
                                     </form>
                                 }
                             </td>
+                        </tr>
+                    }
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-3">No assigned requests found.</td>
                         </tr>
                     }
                 </tbody>

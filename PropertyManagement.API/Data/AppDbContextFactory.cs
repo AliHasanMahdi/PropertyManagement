@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
 namespace PropertyManagement.API.Data
 {
@@ -10,7 +9,10 @@ namespace PropertyManagement.API.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PropertyManagementDB;Trusted_Connection=True;");
+            // Uses LocalDB for running migrations locally (dotnet ef / Package Manager Console)
+            // The deployed app reads its connection string from App Service environment variables
+            optionsBuilder.UseSqlServer(
+                "Server=(localdb)\\mssqllocaldb;Database=PropertyManagementDB;Trusted_Connection=True;TrustServerCertificate=True;");
 
             return new AppDbContext(optionsBuilder.Options);
         }
