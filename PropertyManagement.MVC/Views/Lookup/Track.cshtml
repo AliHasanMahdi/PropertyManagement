@@ -1,0 +1,210 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Public Maintenance Tracker";
+    string currentStatus = Model?.Status?.ToString() ?? "";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <div class="text-center mb-5">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-gradient text-white rounded-circle p-3 shadow-sm mb-3">
+                    <i class="bi bi-shield-wrench fs-2"></i>
+                </div>
+                <h2 class="fw-black text-dark tracking-tight mb-1">Resident Care Portal</h2>
+                <p class="text-muted small text-uppercase fw-semibold tracking-wider">Property Management Support Pipeline</p>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden bg-white border border-light">
+                <div class="card-body p-4 p-md-5">
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-dark mb-1">🔍 Maintenance Request Lookup</h5>
+                        <p class="text-muted small mb-0">Track your real-time processing status anytime without authenticated profile sign-ins.</p>
+                    </div>
+
+                    <form asp-controller="Lookup" asp-action="Track" method="post">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-secondary text-uppercase" style="font-size: 0.75rem;">Maintenance Ticket ID</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-ticket-perforated"></i></span>
+                                    <input type="text" name="ticketNumber" class="form-control border-start-0 bg-light p-2.5" placeholder="e.g. TKT-1001" required value="@Context.Request.Form["ticketNumber"]" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-secondary text-uppercase" style="font-size: 0.75rem;">Registered Contact Phone</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-telephone"></i></span>
+                                    <input type="text" name="phoneNumber" class="form-control border-start-0 bg-light p-2.5" placeholder="e.g. 555-0199" required value="@Context.Request.Form["phoneNumber"]" />
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-dark w-100 py-2.5 fw-bold text-uppercase shadow-sm" style="letter-spacing: 0.5px;">
+                                    <i class="bi bi-search me-2"></i> Verify & Track Progress
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger border-0 shadow-sm rounded-3 d-flex align-items-center p-3 mb-4" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill fs-5 me-3 flex-shrink-0"></i>
+                    <div class="fw-medium">@ViewBag.Error</div>
+                </div>
+            }
+
+            @if (Model != null)
+            {
+                <div class="card border-0 shadow rounded-4 overflow-hidden animate__animated animate__fadeIn">
+
+                    <div class="card-header bg-dark bg-gradient text-white p-4 border-0">
+                        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+                            <div>
+                                <span class="text-white-50 small text-uppercase fw-bold tracking-wider">Active Assignment Dossier</span>
+                                <h4 class="mb-0 fw-bold tracking-tight"><i class="bi bi-bookmark-star me-2 text-warning"></i>ID: @Model.TicketNumber</h4>
+                            </div>
+                            <div>
+                                <span class="badge bg-warning text-dark px-4 py-2.5 rounded-pill fw-black text-uppercase shadow-sm">
+                                    <i class="bi bi-activity me-1"></i> @Model.Status
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-7">
+                                <label class="text-muted small text-uppercase fw-bold d-block mb-1" style="font-size:0.7rem; letter-spacing:0.5px;">Reported Structural Issue</label>
+                                <h4 class="fw-black text-dark mb-3">@Model.Title</h4>
+
+                                <label class="text-muted small text-uppercase fw-bold d-block mb-1" style="font-size:0.7rem; letter-spacing:0.5px;">Location Coordinates</label>
+                                <p class="fs-5 fw-semibold text-secondary mb-0">
+                                    <i class="bi bi-building text-primary me-2"></i>@Model.BuildingName <span class="text-muted fw-normal">|</span> Suite @Model.UnitNumber
+                                </p>
+                            </div>
+                            <div class="col-md-5 bg-light rounded-3 p-4 border border-light">
+                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-secondary border-opacity-10">
+                                    <span class="text-muted small fw-medium">Core Category:</span>
+                                    <span class="badge bg-secondary px-2 py-1">@Model.Category</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-secondary border-opacity-10">
+                                    <span class="text-muted small fw-medium">System Priority:</span>
+                                    <span class="badge bg-danger px-2 py-1">@Model.Priority</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-secondary border-opacity-10">
+                                    <span class="text-muted small fw-medium">Logged Date:</span>
+                                    <span class="text-dark fw-bold small">@Model.CreatedAt</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center pt-1">
+                                    <span class="text-muted small fw-medium">Assigned Engineer:</span>
+                                    <span class="text-dark fw-bold small"><i class="bi bi-person-badge text-primary me-1"></i>@Model.AssignedStaff</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-muted opacity-25" />
+
+                        <h6 class="text-center fw-black text-uppercase tracking-widest text-secondary mb-4" style="font-size:0.75rem;">Real-time Pipeline Status Workflow</h6>
+
+                        <div class="position-relative py-3">
+                            <div class="position-absolute start-0 end-0 bg-light-subtle bg-secondary opacity-25" style="height: 4px; top: 32px; z-index: 0;"></div>
+
+                            <div class="d-flex justify-content-between align-items-start position-relative" style="z-index: 1;">
+
+                                <div class="text-center" style="width: 20%;">
+                                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-lg fs-5"></i>
+                                    </div>
+                                    <span class="small d-block mt-2 fw-bold text-success text-uppercase" style="font-size: 0.65rem;">Received</span>
+                                </div>
+
+                                <div class="text-center" style="width: 20%;">
+                                    @if (currentStatus == "Assigned" || currentStatus == "InProgress" || currentStatus == "Resolved" || currentStatus == "Closed")
+                                    {
+                                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-check-lg fs-5"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 fw-bold text-success text-uppercase" style="font-size: 0.65rem;">Assigned</span>
+                                    }
+                                    else
+                                    {
+                                        <div class="rounded-circle bg-white border border-2 text-muted d-flex align-items-center justify-content-center mx-auto shadow-sm" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-person-gear opacity-50"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 text-muted text-uppercase fw-semibold" style="font-size: 0.65rem;">Assigned</span>
+                                    }
+                                </div>
+
+                                <div class="text-center" style="width: 20%;">
+                                    @if (currentStatus == "InProgress" || currentStatus == "Resolved" || currentStatus == "Closed")
+                                    {
+                                        <div class="rounded-circle bg-warning text-dark d-flex align-items-center justify-content-center mx-auto shadow animate__pulse animate__infinite animate__animated" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-tools fs-5"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 fw-bold text-warning text-uppercase" style="font-size: 0.65rem;">In Progress</span>
+                                    }
+                                    else
+                                    {
+                                        <div class="rounded-circle bg-white border border-2 text-muted d-flex align-items-center justify-content-center mx-auto shadow-sm" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-hourglass opacity-50"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 text-muted text-uppercase fw-semibold" style="font-size: 0.65rem;">In Progress</span>
+                                    }
+                                </div>
+
+                                <div class="text-center" style="width: 20%;">
+                                    @if (currentStatus == "Resolved" || currentStatus == "Closed")
+                                    {
+                                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center mx-auto shadow" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-trophy fs-5"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 fw-bold text-info text-uppercase" style="font-size: 0.65rem;">Resolved</span>
+                                    }
+                                    else
+                                    {
+                                        <div class="rounded-circle bg-white border border-2 text-muted d-flex align-items-center justify-content-center mx-auto shadow-sm" style="width: 40px; height: 40px;">
+                                            <i class="bi bi-flag opacity-50"></i>
+                                        </div>
+                                        <span class="small d-block mt-2 text-muted text-uppercase fw-semibold" style="font-size: 0.65rem;">Resolved</span>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .fw-black {
+        font-weight: 800;
+    }
+
+    .tracking-tight {
+        letter-spacing: -0.5px;
+    }
+
+    .tracking-wider {
+        letter-spacing: 1px;
+    }
+
+    .tracking-widest {
+        letter-spacing: 2px;
+    }
+</style>

@@ -1,3 +1,14 @@
 C:\Users\RANSOR FORCE 7 Elite\Desktop\PropertyManagement-main\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
 D:\Project\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Home\Desktop\Third year\Semester 2\Advanced progrmming\PropertyManagement\PropertyManagement.API\obj\Debug\net9.0\staticwebassets.build.json

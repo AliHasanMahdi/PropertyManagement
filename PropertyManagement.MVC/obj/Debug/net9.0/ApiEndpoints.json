@@ -310,6 +310,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PropertyManagement.API.Controllers.MaintenanceRequestController",
+    "Method": "TrackRequest",
+    "RelativePath": "api/MaintenanceRequest/track/{ticketNumber}/{phone}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticketNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "phone",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PropertyManagement.API.Controllers.ReportingController",
     "Method": "GetMaintenanceStats",
     "RelativePath": "api/Reporting/maintenance-stats",
