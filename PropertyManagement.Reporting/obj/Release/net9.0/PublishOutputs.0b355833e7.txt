@@ -1,0 +1,9 @@
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\PropertyManagement.Reporting.exe
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\appsettings.Development.json
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\appsettings.json
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\appsettings.Production.json
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\PropertyManagement.Reporting.dll
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\PropertyManagement.Reporting.deps.json
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\PropertyManagement.Reporting.runtimeconfig.json
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\PropertyManagement.Reporting.pdb
+D:\Project\New folder\PropertyManagement\PropertyManagement.Reporting\obj\Release\net9.0\PubTmp\Out\System.Security.Permissions.dll
