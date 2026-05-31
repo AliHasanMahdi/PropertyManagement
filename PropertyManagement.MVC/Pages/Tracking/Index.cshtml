@@ -2,10 +2,10 @@
 @model PropertyManagement.MVC.Pages.Tracking.IndexModel
 @{
     ViewData["Title"] = "Maintenance Request Lookup";
-    // Disables external layout inheritance to prevent conflicting styles
+    
     Layout = null;
 
-    // Safely look up status string for the pipeline indicator if a request was found
+    
     string currentStatus = "";
     System.Text.Json.JsonElement resultElement = default;
     if (Model.Input.Found && !string.IsNullOrEmpty(Model.Input.JsonResult))

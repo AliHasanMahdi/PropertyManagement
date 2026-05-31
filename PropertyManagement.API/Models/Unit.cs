@@ -4,11 +4,11 @@
     {
         public int Id { get; set; }
         public string UnitNumber { get; set; } = string.Empty;
-        public string Type { get; set; } = string.Empty; // Apartment / Office / Studio
+        public string Type { get; set; } = string.Empty; 
         public double Size { get; set; }
         public decimal Rent { get; set; }
         public string Amenities { get; set; } = string.Empty;
-        public string Status { get; set; } = "Available"; // Available / Occupied
+        public string Status { get; set; } = "Available"; 
 
         // Foreign Key
         public int BuildingId { get; set; }

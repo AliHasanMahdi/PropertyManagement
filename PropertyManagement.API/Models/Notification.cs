@@ -7,7 +7,7 @@
         public bool IsRead { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        // Foreign Keys (nullable - goes to either Tenant or Staff)
+        // Foreign Keys
         public int? TenantId { get; set; }
         public Tenant? Tenant { get; set; }
 

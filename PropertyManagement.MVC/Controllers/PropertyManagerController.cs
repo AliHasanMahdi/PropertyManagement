@@ -82,8 +82,7 @@ namespace PropertyManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditBuilding(Building building)
         {
-            // the Building model has a Units list that the form doesnt send
-            // so we remove it from model state otherwise IsValid is always false
+            
             ModelState.Remove("Units");
 
             if (ModelState.IsValid)
@@ -167,8 +166,7 @@ namespace PropertyManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUnit(Unit unit)
         {
-            // Unit model has Building, Leases, MaintenanceRequests nav properties
-            // none of them are in the form so we clear them from model state
+            
             ModelState.Remove("Building");
             ModelState.Remove("Leases");
             ModelState.Remove("MaintenanceRequests");

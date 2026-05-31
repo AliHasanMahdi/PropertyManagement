@@ -48,7 +48,7 @@ namespace PropertyManagement.MVC.Controllers
                     PropertyNameCaseInsensitive = true
                 });
 
-                return View(buildings); // Sends the list to Index.cshtml
+                return View(buildings); 
             }
 
             TempData["Error"] = "Failed to retrieve buildings from the server.";
@@ -66,16 +66,16 @@ namespace PropertyManagement.MVC.Controllers
             var content = await response.Content.ReadAsStringAsync();
             var building = JsonSerializer.Deserialize<Building>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            return View(building); // Sends a single building object to Details.cshtml
+            return View(building); 
         }
 
-        // 3. GET: /Building/Create (Just loads the blank creation form screen)
+        // 3. GET
         public IActionResult Create()
         {
             return View();
         }
 
-        // 4. POST: /Building/Create (Takes form submission data and posts it to the API)
+        // 4. POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Building building)
@@ -94,14 +94,14 @@ namespace PropertyManagement.MVC.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Building created successfully!";
-                return RedirectToAction(nameof(Index)); // Send them back to the list
+                return RedirectToAction(nameof(Index)); 
             }
 
             TempData["Error"] = "Could not save the new building.";
             return View(building);
         }
 
-        // 5. GET: /Building/Edit/5 (Loads the edit page with data filled in)
+        // 5. GET
         public async Task<IActionResult> Edit(int id)
         {
             var client = GetApiClient();
@@ -112,11 +112,11 @@ namespace PropertyManagement.MVC.Controllers
             var content = await response.Content.ReadAsStringAsync();
             var building = JsonSerializer.Deserialize<Building>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            // Explicitly loads your custom named view file we built earlier!
+            
             return View("EditBuilding", building);
         }
 
-        // 6. POST: /Building/Edit/5 (Submits form changes to the API)
+        // 6. POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Building building)
@@ -141,7 +141,7 @@ namespace PropertyManagement.MVC.Controllers
             return View("EditBuilding", building);
         }
 
-        // 7. GET: /Building/Delete/5 (Loads a confirmation page before erasing data)
+        // 7. GET
         public async Task<IActionResult> Delete(int id)
         {
             var client = GetApiClient();
@@ -155,7 +155,7 @@ namespace PropertyManagement.MVC.Controllers
             return View(building);
         }
 
-        // 8. POST: /Building/Delete/5 (The actual final "Confirm Delete" click)
+        // 8. POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

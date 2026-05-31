@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public string Status { get; set; } = "Pending"; // Pending / Paid / Overdue
+        public string Status { get; set; } = "Pending"; 
         public string Notes { get; set; } = string.Empty;
 
         // Foreign Key

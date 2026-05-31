@@ -57,15 +57,14 @@ namespace PropertyManagement.MVC.Controllers
             return View();
         }
 
-        // PAGE 1: Lists maintenance requests assigned to the currently logged-in maintenance staff
-        // URL would be: /MaintenanceStaff/AssignedRequests
+        
         public async Task<IActionResult> AssignedRequests()
         {
-            // 1. Get the guy who is currently logged into the website
+            
             var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Challenge(); // Not logged in? Send them to the login page!
+            if (user == null) return Challenge(); 
 
-            // 2. Find this person's record in the MaintenanceStaffs table using their email
+            
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
             if (staff == null)
@@ -84,18 +83,17 @@ namespace PropertyManagement.MVC.Controllers
 
             // 3. Go to the MaintenanceRequests table and grab all jobs assigned to this specific staff ID
             var requests = await _context.MaintenanceRequests
-                .Include(m => m.Tenant) // SQL JOIN: Bring in tenant details (name, phone, etc.) so it's not null
-                .Include(m => m.Unit)   // SQL JOIN: Bring in the unit details (apartment number, etc.)
-                .Where(m => m.MaintenanceStaffId == staff.Id) // Filter: Only get MY jobs
-                .OrderByDescending(m => m.CreatedAt) // Sort: Newest requests at the top
-                .ToListAsync(); // Run the query and put it in a list
+                .Include(m => m.Tenant) 
+                .Include(m => m.Unit)  
+                .Where(m => m.MaintenanceStaffId == staff.Id) 
+                .OrderByDescending(m => m.CreatedAt) 
+                .ToListAsync(); 
 
             // 4. Send the list of requests over to the HTML view (AssignedRequests.cshtml)
             return View(requests);
         }
 
         // PAGE 2: Details of a single assigned request
-        // URL looks like: /MaintenanceStaff/Details/5
         public async Task<IActionResult> Details(int id)
         {
             // Same check as above: who is logged in?
@@ -105,25 +103,24 @@ namespace PropertyManagement.MVC.Controllers
             // Find their staff profile again
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
+            if (staff == null) return RedirectToAction("Dashboard"); 
 
             // Find the specific request matching the ID from the URL *AND* make sure it belongs to this staff member
             var request = await _context.MaintenanceRequests
                 .Include(m => m.Tenant)
                 .Include(m => m.Unit)
                 .Include(m => m.MaintenanceStaff)
-                .FirstOrDefaultAsync(m => m.Id == id && m.MaintenanceStaffId == staff.Id); // Security check: don't let them spy on other staff members' jobs!
+                .FirstOrDefaultAsync(m => m.Id == id && m.MaintenanceStaffId == staff.Id);
 
-            if (request == null) return NotFound(); // Request doesn't exist or doesn't belong to them
+            if (request == null) return NotFound(); 
 
             // Send the single request object to Details.cshtml
             return View(request);
         }
 
         // BUTTON ACTION 1: Start work (Changes status from "Assigned" -> "InProgress")
-        // This is a POST request (triggered by clicking a form button, not just visiting a URL)
         [HttpPost]
-        [ValidateAntiForgeryToken] // Anti-hacker security token check
+        [ValidateAntiForgeryToken] 
         public async Task<IActionResult> StartWork(int id)
         {
             // Check user identity (same routine as before)
@@ -132,7 +129,7 @@ namespace PropertyManagement.MVC.Controllers
 
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
+            if (staff == null) return RedirectToAction("Dashboard"); 
 
             // Find the ticket by its ID
             var request = await _context.MaintenanceRequests.FindAsync(id);
@@ -141,8 +138,8 @@ namespace PropertyManagement.MVC.Controllers
             // Error check: You can't "Start" a job if it's already in progress or already fixed!
             if (request.Status != "Assigned")
             {
-                TempData["Error"] = "Cannot start work: request is not in 'Assigned' status."; // TempData saves a temporary alert message for the next page load
-                return RedirectToAction("AssignedRequests"); // Refresh the page/list
+                TempData["Error"] = "Cannot start work: request is not in 'Assigned' status."; 
+                return RedirectToAction("AssignedRequests"); 
             }
 
             // Change the status string to InProgress
@@ -152,12 +149,12 @@ namespace PropertyManagement.MVC.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "Work started. Status updated to InProgress.";
-            return RedirectToAction("AssignedRequests"); // Go back to the main list
+            return RedirectToAction("AssignedRequests"); 
         }
 
         // BUTTON ACTION 2: Resolve (Changes status from "InProgress" -> "Resolved")
         [HttpPost]
-        [ValidateAntiForgeryToken] // Security token again
+        [ValidateAntiForgeryToken] 
         public async Task<IActionResult> Resolve(int id)
         {
             // Identity checks... (standard boilerplate stuff)
@@ -166,7 +163,7 @@ namespace PropertyManagement.MVC.Controllers
 
             var staff = await _context.MaintenanceStaffs
                 .FirstOrDefaultAsync(s => s.Email == user.Email);
-            if (staff == null) return RedirectToAction("Dashboard"); // Profile auto-created on Dashboard
+            if (staff == null) return RedirectToAction("Dashboard"); 
 
             var request = await _context.MaintenanceRequests.FindAsync(id);
             if (request == null || request.MaintenanceStaffId != staff.Id) return NotFound();
@@ -186,7 +183,7 @@ namespace PropertyManagement.MVC.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "Request resolved successfully.";
-            return RedirectToAction("AssignedRequests"); // Send them back to their dashboard list
+            return RedirectToAction("AssignedRequests"); 
         }
         // Alias so the navbar link /MaintenanceStaff/MyRequests works
         public async Task<IActionResult> MyRequests()

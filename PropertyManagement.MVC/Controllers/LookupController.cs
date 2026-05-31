@@ -31,7 +31,7 @@ namespace PropertyManagement.MVC.Controllers
 
             var client = _httpClientFactory.CreateClient();
 
-            // Adjust the port number (7001) if your API runs on a different port locally
+            
             var response = await client.GetAsync($"https://localhost:7001/api/maintenancerequest/track/{ticketNumber.Trim()}/{phoneNumber.Trim()}");
 
             if (!response.IsSuccessStatusCode)
@@ -43,7 +43,7 @@ namespace PropertyManagement.MVC.Controllers
             var jsonString = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-            // Unpacks as a deserialized object to pass directly to our HTML elements
+            
             var trackingData = JsonSerializer.Deserialize<dynamic>(jsonString, options);
 
             return View(trackingData);

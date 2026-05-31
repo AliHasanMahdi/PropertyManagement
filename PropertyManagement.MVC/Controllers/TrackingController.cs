@@ -19,7 +19,7 @@ namespace PropertyManagement.MVC.Controllers
             _configuration = configuration;
         }
 
-        // Redirect to the Razor Page implementation so there is a single canonical tracking page.
+       
         [HttpGet]
         public IActionResult Index()
         {

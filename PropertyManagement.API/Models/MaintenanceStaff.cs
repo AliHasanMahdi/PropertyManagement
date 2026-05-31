@@ -6,8 +6,8 @@
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
-        public string SkillType { get; set; } = string.Empty; // Plumbing / Electrical / etc
-        public string AvailabilityStatus { get; set; } = "Available"; // Available / Busy
+        public string SkillType { get; set; } = string.Empty; 
+        public string AvailabilityStatus { get; set; } = "Available"; 
 
         // Navigation
         public ICollection<MaintenanceRequest> MaintenanceRequests { get; set; } = new List<MaintenanceRequest>();

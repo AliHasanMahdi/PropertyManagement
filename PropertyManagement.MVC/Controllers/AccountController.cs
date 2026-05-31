@@ -100,12 +100,7 @@ namespace PropertyManagement.MVC.Controllers
                 // Assign the selected role to the new user
                 await _userManager.AddToRoleAsync(user, model.Role);
 
-                // If the user registered as MaintenanceStaff, create a matching
-                // MaintenanceStaff profile in the application's database. We link
-                // the Identity user to the MaintenanceStaff row by email because
-                // this avoids schema or migration changes and keeps the mapping
-                // simple and robust across the existing codebase which looks up
-                // MaintenanceStaff by email.
+                
                 if (model.Role == "MaintenanceStaff")
                 {
                     // Prevent duplicate MaintenanceStaff records by checking email
@@ -116,8 +111,6 @@ namespace PropertyManagement.MVC.Controllers
                         var staff = new MaintenanceStaff
                         {
                             Email = model.Email,
-                            // No full name field on registration form; use the email
-                            // as a reasonable default. Teams may extend the form later.
                             FullName = model.Email,
                             SkillType = "General",
                             AvailabilityStatus = "Available",
