@@ -1,3 +1,9 @@
 /.vs
 /.vs/ProjectEvaluation
 .vs/ProjectEvaluation/propertymanagement.projects.v9.bin
+.vs/
+**/obj/
+**/bin/
+*.user
+*.suo
+project.assets.json
