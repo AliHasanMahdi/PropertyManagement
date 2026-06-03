@@ -26,7 +26,6 @@
                         <th>Status</th>
                         <th>Assigned To</th>
                         <th>Actions</th>
-                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var request in Model)
@@ -44,28 +43,43 @@
                                                                                                                                     @request.Priority
                                                                                                                                 </span>
                                                                                                                             </td>
-                                                                                                                            <td>
-                                                                                                                                <span class="badge
+                            <td>
+                                <span class="badge
                                         @(request.Status == "Submitted" ? "bg-warning" :
                                                                             request.Status == "Assigned" ? "bg-info" :
                                                                             request.Status == "InProgress" ? "bg-primary" :
-                                                                            request.Status == "Resolved" ? "bg-success" : "bg-secondary")">
-                                @request.Status
-                            </span>
-                        </td>
+                                                                            request.Status == "Resolved" ? "bg-success" :
+                                                                            request.Status == "Closed" ? "bg-secondary text-white" : "bg-secondary")">
+                                    @request.Status
+                                </span>
+                            </td>
                         <td>@(request.MaintenanceStaff?.FullName ?? "Unassigned")</td>
                         <td>
-                            <form asp-action="AssignStaff" method="post" class="d-inline">
-                                <input type="hidden" name="requestId" value="@request.Id" />
-                                <select name="staffId" class="form-select form-select-sm d-inline w-auto">
-                                    @foreach (var staff in staffList)
-                                        {
-                                            <option value="@staff.Id">@staff.FullName</option>
-                                        }
-                                    </select>
-                                    <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+                            @if (request.Status == "Resolved")
+                            {
+                                <form asp-action="CloseRequest" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@request.Id" />
+                                    <button type="submit" class="btn btn-sm btn-dark">Close</button>
                                 </form>
-                            </td>
+                            }
+                            else if (request.Status != "Closed")
+                            {
+                                <form asp-action="AssignStaff" method="post" class="d-inline">
+                                    <input type="hidden" name="requestId" value="@request.Id" />
+                                    <select name="staffId" class="form-select form-select-sm d-inline w-auto">
+                                        @foreach (var staff in staffList)
+                                            {
+                                                <option value="@staff.Id">@staff.FullName</option>
+                                            }
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-primary">Assign</button>
+                                    </form>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
                         </tr>
                     }
                 </tbody>

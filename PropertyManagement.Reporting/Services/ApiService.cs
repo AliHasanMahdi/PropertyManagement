@@ -70,24 +70,23 @@ namespace PropertyManagement.Reporting.Services
 
         public async Task<T?> GetAsync<T>(string endpoint)
         {
-            try
+            var client = CreateClient();
+
+            // Capture token presence for diagnostics
+            var token = _httpContextAccessor.HttpContext?.Session.GetString("JwtToken");
+
+            var response = await client.GetAsync(endpoint);
+
+            if (response.IsSuccessStatusCode)
             {
-                var client = CreateClient();
-                var response = await client.GetAsync(endpoint);
-
-                if (!response.IsSuccessStatusCode) return default;
-
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonSerializer.Deserialize<T>(content,
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             }
-            catch
-            {
-                return default;
-            }
+
+            // On failure, return detailed diagnostic information via exception so caller can observe
+            var body = await response.Content.ReadAsStringAsync();
+            throw new HttpRequestException($"GET {endpoint} returned {(int)response.StatusCode} {response.ReasonPhrase}. TokenPresent={(token != null)}. Body: {body}");
         }
     }
 }

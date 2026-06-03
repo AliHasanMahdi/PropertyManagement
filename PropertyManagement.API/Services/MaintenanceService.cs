@@ -100,12 +100,13 @@ namespace PropertyManagement.API.Services
 
             request.Status = status;
             if (status == "Resolved") request.ResolvedAt = DateTime.Now;
+            if (status == "Closed") request.ClosedAt = DateTime.Now;
 
             await _context.SaveChangesAsync();
 
             // Broadcast status update to all connected clients
             await _hubContext.Clients.Group("MaintenanceBoard")
-                .SendAsync("StatusUpdated", MapToDto(request));
+                .SendAsync("StatusUpdated", MapToDto(request)); // Updated to ensure clarity
 
             return true;
         }
@@ -154,6 +155,7 @@ namespace PropertyManagement.API.Services
             Status = m.Status,
             CreatedAt = m.CreatedAt,
             ResolvedAt = m.ResolvedAt,
+            ClosedAt = m.ClosedAt,
             TenantName = m.Tenant?.FullName ?? "",
             UnitNumber = m.Unit?.UnitNumber ?? "",
             AssignedStaffName = m.MaintenanceStaff?.FullName

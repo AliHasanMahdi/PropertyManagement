@@ -32,6 +32,9 @@ namespace PropertyManagement.API.DTOs.Lease
         public decimal Amount { get; set; }
 
         public string Notes { get; set; } = string.Empty;
+
+        // Optional DueDate for the payment when creating via API
+        public DateTime? DueDate { get; set; }
     }
 
     public class LeaseResponseDto

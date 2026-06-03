@@ -31,6 +31,8 @@ namespace PropertyManagement.API.DTOs.Maintenance
         public string Status { get; set; } = string.Empty;
     }
 
+    // Server may send Closed timestamp in responses in future
+
     public class AssignStaffDto
     {
         [Required(ErrorMessage = "Staff member is required")]
@@ -48,6 +50,7 @@ namespace PropertyManagement.API.DTOs.Maintenance
         public string Status { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public DateTime? ResolvedAt { get; set; }
+        public DateTime? ClosedAt { get; set; }
         public string TenantName { get; set; } = string.Empty;
         public string UnitNumber { get; set; } = string.Empty;
         public string? AssignedStaffName { get; set; }

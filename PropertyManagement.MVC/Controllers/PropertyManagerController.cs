@@ -37,7 +37,10 @@ namespace PropertyManagement.MVC.Controllers
             ViewBag.TotalTenants = await _context.Tenants.CountAsync();
             ViewBag.PendingRequests = await _context.MaintenanceRequests.CountAsync(m => m.Status == "Submitted");
             ViewBag.ActiveLeases = await _context.Leases.CountAsync(l => l.Status == "Active");
-            ViewBag.OverduePayments = await _context.Payments.CountAsync(p => p.Status == "Overdue");
+            // Count overdue payments using new logic: not Paid and due date before today
+            var today = DateTime.Today;
+            ViewBag.OverduePayments = await _context.Payments
+                .CountAsync(p => p.Status != "Paid" && p.DueDate.HasValue && p.DueDate.Value.Date < today);
             return View();
         }
 
@@ -446,6 +449,53 @@ namespace PropertyManagement.MVC.Controllers
             return RedirectToAction("MaintenanceRequests");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CloseRequest(int id)
+        {
+            var request = await _context.MaintenanceRequests.FindAsync(id);
+            if (request == null)
+            {
+                TempData["Error"] = "Request not found.";
+                return RedirectToAction("MaintenanceRequests");
+            }
+
+            // Only allow closing requests that are currently Resolved
+            if (request.Status != "Resolved")
+            {
+                TempData["Error"] = "Only resolved requests can be closed.";
+                return RedirectToAction("MaintenanceRequests");
+            }
+
+            request.Status = "Closed";
+            request.ClosedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            // Notify staff / broadcast to live board
+            var staff = await _context.MaintenanceStaffs.FindAsync(request.MaintenanceStaffId);
+            if (staff != null)
+            {
+                var notification = new Notification
+                {
+                    MaintenanceStaffId = staff.Id,
+                    Message = $"Maintenance request #{request.TicketNumber} has been closed.",
+                    CreatedAt = DateTime.Now
+                };
+                _context.Notifications.Add(notification);
+                await _context.SaveChangesAsync();
+            }
+
+            await _hubContext.Clients.Group("MaintenanceBoard").SendAsync("StatusUpdated", new
+            {
+                request.Id,
+                request.TicketNumber,
+                request.Status,
+                ClosedAt = request.ClosedAt
+            });
+
+            TempData["Success"] = "Request closed successfully.";
+            return RedirectToAction("MaintenanceRequests");
+        }
+
         // ==================== PAYMENTS ====================
         public async Task<IActionResult> Payments()
         {
@@ -465,7 +515,7 @@ namespace PropertyManagement.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPayment(int leaseId, decimal amount, string notes)
+        public async Task<IActionResult> AddPayment(int leaseId, decimal amount, string notes, DateTime? dueDate)
         {
             var payment = new Payment
             {
@@ -473,7 +523,9 @@ namespace PropertyManagement.MVC.Controllers
                 Amount = amount,
                 PaymentDate = DateTime.Now,
                 Status = "Paid",
-                Notes = notes
+                Notes = notes,
+                // Save optional DueDate from the form (keeps compatibility when null)
+                DueDate = dueDate
             };
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();

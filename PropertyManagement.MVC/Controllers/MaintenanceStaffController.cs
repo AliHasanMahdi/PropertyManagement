@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PropertyManagement.API.Data;
 using PropertyManagement.API.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace PropertyManagement.MVC.Controllers
 {
@@ -14,12 +15,15 @@ namespace PropertyManagement.MVC.Controllers
         // Global variables to hold our database connection and user manager stuff
         private readonly AppDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly Microsoft.AspNetCore.SignalR.IHubContext<PropertyManagement.API.Hubs.MaintenanceHub> _hubContext;
 
         // Constructor: This is where dependency injection injects the DB and User system so we can actually use them below
-        public MaintenanceStaffController(AppDbContext context, UserManager<IdentityUser> userManager)
+        public MaintenanceStaffController(AppDbContext context, UserManager<IdentityUser> userManager,
+            Microsoft.AspNetCore.SignalR.IHubContext<PropertyManagement.API.Hubs.MaintenanceHub> hubContext)
         {
             _context = context;
             _userManager = userManager;
+            _hubContext = hubContext;
         }
         //fixing dashboard 
         public async Task<IActionResult> Dashboard()
@@ -148,6 +152,14 @@ namespace PropertyManagement.MVC.Controllers
             // SAVE CHANGES TO DATABASE (If you forget this, nothing actually updates in SQL!)
             await _context.SaveChangesAsync();
 
+            // Broadcast status change to live board
+            await _hubContext.Clients.Group("MaintenanceBoard").SendAsync("RequestUpdated", new
+            {
+                request.Id,
+                request.TicketNumber,
+                request.Status
+            });
+
             TempData["Success"] = "Work started. Status updated to InProgress.";
             return RedirectToAction("AssignedRequests"); 
         }
@@ -181,6 +193,15 @@ namespace PropertyManagement.MVC.Controllers
 
             // Save it to the database!
             await _context.SaveChangesAsync();
+
+            // Broadcast resolved event
+            await _hubContext.Clients.Group("MaintenanceBoard").SendAsync("RequestResolved", new
+            {
+                request.Id,
+                request.TicketNumber,
+                request.Status,
+                ResolvedAt = request.ResolvedAt
+            });
 
             TempData["Success"] = "Request resolved successfully.";
             return RedirectToAction("AssignedRequests"); 

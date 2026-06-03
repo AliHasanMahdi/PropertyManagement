@@ -17,6 +17,7 @@
                         <th>Tenant</th>
                         <th>Amount</th>
                         <th>Date</th>
+                        <th>Due Date</th>
                         <th>Status</th>
                         <th>Notes</th>
                     </tr>
@@ -29,6 +30,7 @@
                             <td>@payment.Lease?.Tenant?.FullName</td>
                             <td>BD @payment.Amount</td>
                             <td>@payment.PaymentDate.ToShortDateString()</td>
+                            <td>@(payment.DueDate.HasValue ? payment.DueDate.Value.ToShortDateString() : "-")</td>
                             <td>
                                 <span class="badge @(payment.Status == "Paid" ? "bg-success" : "bg-danger")">
                                     @payment.Status
@@ -66,7 +68,11 @@
                     <input type="number" name="amount" step="0.01" min="0.01"
                            class="form-control" placeholder="0.00" required />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
+                    <label class="form-label fw-bold">Due Date</label>
+                    <input type="date" name="dueDate" class="form-control" />
+                </div>
+                <div class="col-md-2">
                     <label class="form-label fw-bold">Notes</label>
                     <input type="text" name="notes" class="form-control"
                            placeholder="e.g. May rent" />

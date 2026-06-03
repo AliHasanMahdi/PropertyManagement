@@ -51,10 +51,12 @@ namespace PropertyManagement.API.Controllers
         [HttpGet("overdue-payments")]
         public async Task<IActionResult> GetOverduePayments()
         {
+            // Overdue logic: Status != "Paid" AND DueDate < Today
+            var today = DateTime.Today;
             var overdue = await _context.Payments
                 .Include(p => p.Lease)
                 .ThenInclude(l => l.Tenant)
-                .Where(p => p.Status == "Overdue")
+                .Where(p => p.Status != "Paid" && p.DueDate.HasValue && p.DueDate.Value.Date < today)
                 .ToListAsync();
 
             return Ok(overdue);

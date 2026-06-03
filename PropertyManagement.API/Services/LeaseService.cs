@@ -120,16 +120,21 @@ namespace PropertyManagement.API.Services
                 LeaseId = leaseId,
                 Amount = dto.Amount,
                 PaymentDate = DateTime.Now,
+                // Use Paid status for payments created via this flow
                 Status = "Paid",
                 Notes = dto.Notes
             };
+
+            // If an optional DueDate was supplied, set it (keeps compatibility)
+            if (dto.DueDate.HasValue)
+                payment.DueDate = dto.DueDate;
 
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
             return true;
         }
 
-        private static LeaseResponseDto MapToDto(Lease l) => new()
+            private static LeaseResponseDto MapToDto(Lease l) => new()
         {
             Id = l.Id,
             Status = l.Status,
@@ -140,7 +145,8 @@ namespace PropertyManagement.API.Services
             UnitNumber = l.Unit?.UnitNumber ?? "",
             BuildingName = l.Unit?.Building?.Name ?? "",
             TotalPaid = l.Payments?.Where(p => p.Status == "Paid").Sum(p => p.Amount) ?? 0,
-            HasOverduePayments = l.Payments?.Any(p => p.Status == "Overdue") ?? false
+            // Overdue logic: payment not Paid AND DueDate < today
+            HasOverduePayments = l.Payments?.Any(p => p.Status != "Paid" && p.DueDate.HasValue && p.DueDate.Value.Date < DateTime.Today) ?? false
         };
     }
 }

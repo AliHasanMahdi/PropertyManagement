@@ -6,4 +6,7 @@
 **/bin/
 *.user
 *.suo
+*.dll
+*.pdb
+*.exe
 project.assets.json

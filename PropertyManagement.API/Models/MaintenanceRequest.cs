@@ -12,6 +12,8 @@
         
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? ResolvedAt { get; set; }
+        // Optional closed timestamp for requests that are finalized
+        public DateTime? ClosedAt { get; set; }
 
         // Foreign Keys
         public int TenantId { get; set; }
